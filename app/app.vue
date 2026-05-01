@@ -1,26 +1,72 @@
 <script setup>
+const siteName = "Stroke Speech";
+const siteUrl = "https://macarthuror.github.io/stroke-speach";
+const defaultTitle = "Comunicación asistida AAC";
+const defaultDescription =
+  "Aplicación AAC accesible con síntesis de voz, PWA instalable y soporte offline para rehabilitación del habla.";
+const socialImage = `${siteUrl}/pwa-512.png`;
+
+const route = useRoute();
+const canonicalUrl = computed(() => `${siteUrl}${route.path === "/" ? "" : route.path}`);
+const structuredData = computed(() =>
+  JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: siteName,
+    applicationCategory: "HealthApplication",
+    operatingSystem: "Web",
+    inLanguage: "es",
+    description: defaultDescription,
+    url: siteUrl,
+    image: socialImage,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD"
+    },
+    author: {
+      "@type": "Person",
+      name: "MacArthur Orozco"
+    }
+  }),
+);
+
 useHead({
   meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
-  link: [{ rel: "icon", href: "/favicon.ico" }],
+  link: [
+    { rel: "icon", href: "/favicon.ico" },
+    { rel: "canonical", href: () => canonicalUrl.value }
+  ],
+  script: [{ type: "application/ld+json", children: () => structuredData.value }],
   htmlAttrs: {
     lang: "es",
   },
 });
 
-const title = "Nuxt Starter Template";
-const description =
-  "A production-ready starter template powered by Nuxt UI. Build beautiful, accessible, and performant applications in minutes, not hours.";
-
 useSeoMeta({
-  title,
-  description,
-  ogTitle: title,
-  ogDescription: description,
-  ogImage: "https://ui.nuxt.com/assets/templates/nuxt/starter-light.png",
+  title: defaultTitle,
+  titleTemplate: `%s | ${siteName}`,
+  description: defaultDescription,
+  applicationName: siteName,
+  author: "MacArthur Orozco",
+  keywords:
+    "stroke speech, AAC, comunicación asistida, rehabilitación del habla, post ictus, text to speech, PWA, accesibilidad",
+  robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  ogType: "website",
+  ogSiteName: siteName,
+  ogLocale: "es_MX",
+  ogTitle: `${siteName} - ${defaultTitle}`,
+  ogDescription: defaultDescription,
+  ogUrl: () => canonicalUrl.value,
+  ogImage: socialImage,
+  ogImageAlt: "Stroke Speech logo",
   twitterCard: "summary_large_image",
+  twitterTitle: `${siteName} - ${defaultTitle}`,
+  twitterDescription: defaultDescription,
+  twitterImage: socialImage,
+  twitterImageAlt: "Stroke Speech logo",
 });
 
-const route = useRoute();
 const colorMode = useColorMode();
 const { isDeleteMode, toggleDeleteMode, disableDeleteMode } = useDeleteMode();
 

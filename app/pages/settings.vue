@@ -2,7 +2,7 @@
 useSeoMeta({
   title: "Ajustes generales",
   description:
-    "Página de ajustes generales para configuración visual y comportamiento de la aplicación Mi Voz.",
+    "Configuración general de Stroke Speech: tema visual y preferencias de uso.",
 });
 </script>
 

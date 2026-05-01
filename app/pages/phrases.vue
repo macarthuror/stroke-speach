@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import type { AddNewItem } from "~/typos";
+
+useSeoMeta({
+  title: "Frases",
+  description:
+    "Frases AAC personalizables para facilitar comunicación cotidiana con voz asistida.",
+});
+
 const { speak } = useAacSpeech("es-ES");
 const isStorageReady = ref(false);
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: "Stroke Speech | About this project",
+  title: "About this project",
   description:
     "Aplicación AAC accesible para comunicación asistida, con soporte PWA, modo offline y síntesis de voz para rehabilitación del habla.",
 });

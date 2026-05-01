@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import type { AddNewItem } from "~/typos";
 
+useSeoMeta({
+  title: "Inicio",
+  description:
+    "Tarjetas AAC de palabras para comunicación asistida rápida con síntesis de voz.",
+});
+
 const { speak } = useAacSpeech("es-MX");
 const isStorageReady = ref(false);
 
