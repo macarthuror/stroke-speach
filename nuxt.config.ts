@@ -69,6 +69,8 @@ export default defineNuxtConfig({
       navigateFallback: `${baseURL}index.html`,
       globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,json,txt,woff2}"],
       cleanupOutdatedCaches: true,
+      skipWaiting: true,
+      clientsClaim: true,
     },
     client: {
       installPrompt: true,
