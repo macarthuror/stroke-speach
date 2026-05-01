@@ -99,7 +99,12 @@ onMounted(() => {
             @delete="onCardDelete(index)"
           />
 
-          <AddCard :title="t('index.addCardTitle')" has-emoji is-word @adding="onAdding" />
+          <AddCard
+            :title="t('index.addCardTitle')"
+            has-emoji
+            is-word
+            @adding="onAdding"
+          />
         </template>
 
         <template v-else>

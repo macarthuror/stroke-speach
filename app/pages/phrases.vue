@@ -1,62 +1,62 @@
 <script setup lang="ts">
-import type { AddNewItem } from '~/typos'
+import type { AddNewItem } from "~/typos";
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 useSeoMeta({
-  title: () => t('phrases.seoTitle'),
-  description: () => t('phrases.seoDescription')
-})
+  title: () => t("phrases.seoTitle"),
+  description: () => t("phrases.seoDescription"),
+});
 
-const speechLang = useLocalStorage<string>('speech-lang', 'es-MX')
-const pitch = useLocalStorage<number>('speech-pitch', 1)
-const rate = useLocalStorage<number>('speech-rate', 1)
-const { speak } = useAacSpeech(speechLang, pitch, rate)
-const isStorageReady = ref(false)
+const speechLang = useLocalStorage<string>("speech-lang", "es-MX");
+const pitch = useLocalStorage<number>("speech-pitch", 1);
+const rate = useLocalStorage<number>("speech-rate", 1);
+const { speak } = useAacSpeech(speechLang, pitch, rate);
+const isStorageReady = ref(false);
 
 type Phrase = {
-  text: string
-  toneClass: string
-}
+  text: string;
+  toneClass: string;
+};
 
-const phrases = useLocalStorage<Phrase[]>('phrases', [
+const phrases = useLocalStorage<Phrase[]>("phrases", [
   {
-    text: t('phrases.defaults.cold'),
-    toneClass: 'bg-pastel-blue'
+    text: t("phrases.defaults.cold"),
+    toneClass: "bg-pastel-blue",
   },
   {
-    text: t('phrases.defaults.hot'),
-    toneClass: 'bg-pastel-blue'
+    text: t("phrases.defaults.hot"),
+    toneClass: "bg-pastel-blue",
   },
   {
-    text: t('phrases.defaults.painHere'),
-    toneClass: 'bg-pastel-blue'
+    text: t("phrases.defaults.painHere"),
+    toneClass: "bg-pastel-blue",
   },
   {
-    text: t('phrases.defaults.family'),
-    toneClass: 'bg-pastel-blue'
-  }
-])
+    text: t("phrases.defaults.family"),
+    toneClass: "bg-pastel-blue",
+  },
+]);
 
 const onCardSelect = (text: string) => {
-  speak(text)
-}
+  speak(text);
+};
 
 const onCardDelete = (index: number) => {
-  phrases.value = phrases.value.filter((_, cardIndex) => cardIndex !== index)
-}
+  phrases.value = phrases.value.filter((_, cardIndex) => cardIndex !== index);
+};
 
 const onAdding = (item: string) => {
-  const newItem: Omit<AddNewItem, 'emoji'> = JSON.parse(item)
+  const newItem: Omit<AddNewItem, "emoji"> = JSON.parse(item);
   phrases.value.push({
     text: newItem.text,
-    toneClass: newItem.toneClass ?? 'bg-pastel-blue'
-  })
-}
+    toneClass: newItem.toneClass ?? "bg-pastel-blue",
+  });
+};
 
 onMounted(() => {
-  isStorageReady.value = true
-})
+  isStorageReady.value = true;
+});
 </script>
 
 <template>
@@ -79,17 +79,11 @@ onMounted(() => {
             @delete="onCardDelete(index)"
           />
 
-          <AddCard
-            :title="t('phrases.addCardTitle')"
-            @adding="onAdding"
-          />
+          <AddCard :title="t('phrases.addCardTitle')" @adding="onAdding" />
         </template>
 
         <template v-else>
-          <VoiceCardSkeleton
-            v-for="index in 6"
-            :key="index"
-          />
+          <VoiceCardSkeleton v-for="index in 6" :key="index" />
         </template>
       </div>
     </main>

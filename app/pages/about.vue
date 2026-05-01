@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t } = useI18n();
 
 useSeoMeta({
-  title: () => t('about.seoTitle'),
-  description: () => t('about.seoDescription')
-})
+  title: () => t("about.seoTitle"),
+  description: () => t("about.seoDescription"),
+});
 </script>
 
 <template>
@@ -16,42 +16,42 @@ useSeoMeta({
         src="/pwa-icon.svg"
         :alt="t('app.seo.ogImageAlt')"
         class="h-16 w-16 rounded-2xl border border-default bg-default p-2"
-      >
+      />
 
       <div>
         <h2 class="text-2xl font-semibold tracking-tight">
-          {{ t('about.title') }}
+          {{ t("about.title") }}
         </h2>
         <p class="mt-1 text-sm text-[#4b5563] dark:text-[#d1d5db]">
-          {{ t('about.subtitle') }}
+          {{ t("about.subtitle") }}
         </p>
       </div>
     </div>
 
     <p class="mt-4 text-sm leading-6 text-[#4b5563] dark:text-[#d1d5db]">
-      {{ t('about.p1') }}
+      {{ t("about.p1") }}
     </p>
 
     <p class="mt-3 text-sm leading-6 text-[#4b5563] dark:text-[#d1d5db]">
-      {{ t('about.p2') }}
+      {{ t("about.p2") }}
     </p>
 
     <div class="mt-6 grid gap-4 sm:grid-cols-2">
       <article class="rounded-xl border border-default bg-default p-4">
         <h3 class="text-sm font-semibold">
-          {{ t('about.goalsTitle') }}
+          {{ t("about.goalsTitle") }}
         </h3>
         <p class="mt-2 text-sm text-[#4b5563] dark:text-[#d1d5db]">
-          {{ t('about.goalsText') }}
+          {{ t("about.goalsText") }}
         </p>
       </article>
 
       <article class="rounded-xl border border-default bg-default p-4">
         <h3 class="text-sm font-semibold">
-          {{ t('about.featuresTitle') }}
+          {{ t("about.featuresTitle") }}
         </h3>
         <p class="mt-2 text-sm text-[#4b5563] dark:text-[#d1d5db]">
-          {{ t('about.featuresText') }}
+          {{ t("about.featuresText") }}
         </p>
       </article>
 
@@ -59,10 +59,10 @@ useSeoMeta({
         class="rounded-xl border border-default bg-default p-4 sm:col-span-2"
       >
         <h3 class="text-sm font-semibold">
-          {{ t('about.techTitle') }}
+          {{ t("about.techTitle") }}
         </h3>
         <p class="mt-2 text-sm text-[#4b5563] dark:text-[#d1d5db]">
-          {{ t('about.techText') }}
+          {{ t("about.techText") }}
         </p>
       </article>
     </div>

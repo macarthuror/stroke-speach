@@ -1,105 +1,105 @@
 <script setup>
-const { t, locale, setLocale } = useI18n()
+const { t, locale, setLocale } = useI18n();
 
-const siteName = 'Stroke Speech'
-const siteUrl = 'https://macarthuror.github.io/stroke-speach'
+const siteName = "Stroke Speech";
+const siteUrl = "https://macarthuror.github.io/stroke-speach";
 
-const defaultTitle = computed(() => t('app.seo.defaultTitle'))
-const defaultDescription = computed(() => t('app.seo.defaultDescription'))
-const socialImage = `${siteUrl}/pwa-512.png`
+const defaultTitle = computed(() => t("app.seo.defaultTitle"));
+const defaultDescription = computed(() => t("app.seo.defaultDescription"));
+const socialImage = `${siteUrl}/pwa-512.png`;
 
-const route = useRoute()
+const route = useRoute();
 const canonicalUrl = computed(
-  () => `${siteUrl}${route.path === '/' ? '' : route.path}`
-)
+  () => `${siteUrl}${route.path === "/" ? "" : route.path}`,
+);
 const structuredData = computed(() =>
   JSON.stringify({
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': siteName,
-    'applicationCategory': 'HealthApplication',
-    'operatingSystem': 'Web',
-    'inLanguage': locale.value,
-    'description': defaultDescription.value,
-    'url': siteUrl,
-    'image': socialImage,
-    'offers': {
-      '@type': 'Offer',
-      'price': '0',
-      'priceCurrency': 'USD'
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: siteName,
+    applicationCategory: "HealthApplication",
+    operatingSystem: "Web",
+    inLanguage: locale.value,
+    description: defaultDescription.value,
+    url: siteUrl,
+    image: socialImage,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
     },
-    'author': {
-      '@type': 'Person',
-      'name': 'MacArthur Orozco'
-    }
-  })
-)
+    author: {
+      "@type": "Person",
+      name: "MacArthur Orozco",
+    },
+  }),
+);
 
 useHead({
-  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
+  meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
   link: [
-    { rel: 'icon', href: '/favicon.ico' },
-    { rel: 'canonical', href: () => canonicalUrl.value }
+    { rel: "icon", href: "/favicon.ico" },
+    { rel: "canonical", href: () => canonicalUrl.value },
   ],
   script: [
-    { type: 'application/ld+json', children: () => structuredData.value }
+    { type: "application/ld+json", children: () => structuredData.value },
   ],
   htmlAttrs: {
-    lang: () => locale.value
-  }
-})
+    lang: () => locale.value,
+  },
+});
 
 useSeoMeta({
   title: () => defaultTitle.value,
   titleTemplate: `%s | ${siteName}`,
   description: () => defaultDescription.value,
   applicationName: siteName,
-  author: 'MacArthur Orozco',
-  keywords: () => t('app.seo.keywords'),
+  author: "MacArthur Orozco",
+  keywords: () => t("app.seo.keywords"),
   robots:
-    'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  ogType: 'website',
+    "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  ogType: "website",
   ogSiteName: siteName,
-  ogLocale: () => locale.value === 'en' ? 'en_US' : 'es_MX',
+  ogLocale: () => (locale.value === "en" ? "en_US" : "es_MX"),
   ogTitle: () => `${siteName} - ${defaultTitle.value}`,
   ogDescription: () => defaultDescription.value,
   ogUrl: () => canonicalUrl.value,
   ogImage: socialImage,
-  ogImageAlt: () => t('app.seo.ogImageAlt'),
-  twitterCard: 'summary_large_image',
+  ogImageAlt: () => t("app.seo.ogImageAlt"),
+  twitterCard: "summary_large_image",
   twitterTitle: () => `${siteName} - ${defaultTitle.value}`,
   twitterDescription: () => defaultDescription.value,
   twitterImage: socialImage,
-  twitterImageAlt: () => t('app.seo.ogImageAlt')
-})
+  twitterImageAlt: () => t("app.seo.ogImageAlt"),
+});
 
 const uiLocaleOptions = computed(() => [
-  { label: t('language.spanish'), value: 'es' },
-  { label: t('language.english'), value: 'en' }
-])
+  { label: t("language.spanish"), value: "es" },
+  { label: t("language.english"), value: "en" },
+]);
 
 const onUiLocaleChange = (value) => {
   if (value === locale.value) {
-    return
+    return;
   }
-  setLocale(value)
-}
+  setLocale(value);
+};
 
-const colorMode = useColorMode()
-const { isDeleteMode, toggleDeleteMode, disableDeleteMode } = useDeleteMode()
+const colorMode = useColorMode();
+const { isDeleteMode, toggleDeleteMode, disableDeleteMode } = useDeleteMode();
 
-const isDark = computed(() => colorMode.value === 'dark')
+const isDark = computed(() => colorMode.value === "dark");
 
 function toggleTheme() {
-  colorMode.preference = isDark.value ? 'light' : 'dark'
+  colorMode.preference = isDark.value ? "light" : "dark";
 }
 
 watch(
   () => route.path,
   () => {
-    disableDeleteMode()
-  }
-)
+    disableDeleteMode();
+  },
+);
 </script>
 
 <template>
@@ -109,7 +109,7 @@ watch(
         class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6"
       >
         <h1 class="text-base font-semibold">
-          {{ t('app.brand') }}
+          {{ t("app.brand") }}
         </h1>
 
         <div class="flex items-center gap-2">
@@ -149,15 +149,12 @@ watch(
     <UMain class="pb-24">
       <NuxtPage />
 
-      <USeparator
-        icon="i-simple-icons-nuxtdotjs"
-        class="mt-10"
-      />
+      <USeparator icon="i-simple-icons-nuxtdotjs" class="mt-10" />
 
       <UFooter>
         <template #left>
           <p class="text-sm text-muted">
-            {{ t('app.madeWith') }}
+            {{ t("app.madeWith") }}
           </p>
         </template>
 

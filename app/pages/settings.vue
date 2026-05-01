@@ -133,7 +133,9 @@ const currentLangDemo = computed(
   <section
     class="mx-auto w-full max-w-4xl px-6 py-8 text-[#1c1b1b] dark:text-[#f4f4f5]"
   >
-    <h2 class="text-2xl font-semibold tracking-tight">{{ t("settings.title") }}</h2>
+    <h2 class="text-2xl font-semibold tracking-tight">
+      {{ t("settings.title") }}
+    </h2>
 
     <p class="mt-4 text-sm leading-6 text-[#4b5563] dark:text-[#d1d5db]">
       {{ t("settings.intro") }}
@@ -154,7 +156,9 @@ const currentLangDemo = computed(
 
       <div class="rounded-xl border border-default bg-default p-4 space-y-4">
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium">{{ t("settings.speechControls") }}</span>
+          <span class="text-sm font-medium">{{
+            t("settings.speechControls")
+          }}</span>
           <UButton
             size="xs"
             variant="ghost"

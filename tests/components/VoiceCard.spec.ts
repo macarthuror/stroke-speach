@@ -1,12 +1,12 @@
 import { mount } from "@vue/test-utils";
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from "vitest";
 import VoiceCard from "../../app/components/VoiceCard.vue";
 
-vi.mock('../../app/composables/useDeleteMode', () => ({
+vi.mock("../../app/composables/useDeleteMode", () => ({
   useDeleteMode: () => ({
-    isDeleteMode: true
-  })
-}))
+    isDeleteMode: true,
+  }),
+}));
 
 describe("VoiceCard", () => {
   it("renders text and emoji", () => {

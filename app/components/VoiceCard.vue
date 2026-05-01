@@ -1,35 +1,35 @@
 <script setup lang="ts">
-import { useDeleteMode } from '../composables/useDeleteMode'
+import { useDeleteMode } from "../composables/useDeleteMode";
 
 const props = withDefaults(
   defineProps<{
-    title?: string
-    emoji?: string
-    text: string
-    toneClass?: string
-    deleteAriaLabel?: string
+    title?: string;
+    emoji?: string;
+    text: string;
+    toneClass?: string;
+    deleteAriaLabel?: string;
   }>(),
   {
     title: undefined,
-    toneClass: 'bg-pastel-blue',
-    deleteAriaLabel: 'Eliminar tarjeta'
-  }
-)
+    toneClass: "bg-pastel-blue",
+    deleteAriaLabel: "Eliminar tarjeta",
+  },
+);
 
 const emit = defineEmits<{
-  select: [text: string]
-  delete: []
-}>()
+  select: [text: string];
+  delete: [];
+}>();
 
 const onSelect = () => {
-  emit('select', props.text)
-}
+  emit("select", props.text);
+};
 
 const onDelete = () => {
-  emit('delete')
-}
+  emit("delete");
+};
 
-const { isDeleteMode } = useDeleteMode()
+const { isDeleteMode } = useDeleteMode();
 </script>
 
 <template>
@@ -43,10 +43,7 @@ const { isDeleteMode } = useDeleteMode()
       class="w-full h-full min-h-[180px] rounded-2xl flex flex-col items-center justify-center gap-4 p-4 transition-all duration-150 active:scale-95 active:brightness-90 cursor-pointer"
       @click="onSelect"
     >
-      <span
-        aria-hidden="true"
-        class="text-6xl"
-      >{{ emoji }}</span>
+      <span aria-hidden="true" class="text-6xl">{{ emoji }}</span>
       <span
         class="font-button-text text-button-text text-[#1A1A1A] dark:text-[#F0F0F0]"
       >
