@@ -1,1 +1,1 @@
-declare module "vue3-emoji-picker/css";
+declare module 'vue3-emoji-picker/css';

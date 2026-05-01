@@ -1,92 +1,92 @@
 <script setup>
-const siteName = "Stroke Speech";
-const siteUrl = "https://macarthuror.github.io/stroke-speach";
-const defaultTitle = "Comunicación asistida AAC";
-const defaultDescription =
-  "Aplicación AAC accesible con síntesis de voz, PWA instalable y soporte offline para rehabilitación del habla.";
-const socialImage = `${siteUrl}/pwa-512.png`;
+const siteName = 'Stroke Speech'
+const siteUrl = 'https://macarthuror.github.io/stroke-speach'
+const defaultTitle = 'Comunicación asistida AAC'
+const defaultDescription
+  = 'Aplicación AAC accesible con síntesis de voz, PWA instalable y soporte offline para rehabilitación del habla.'
+const socialImage = `${siteUrl}/pwa-512.png`
 
-const route = useRoute();
+const route = useRoute()
 const canonicalUrl = computed(
-  () => `${siteUrl}${route.path === "/" ? "" : route.path}`,
-);
+  () => `${siteUrl}${route.path === '/' ? '' : route.path}`
+)
 const structuredData = computed(() =>
   JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: siteName,
-    applicationCategory: "HealthApplication",
-    operatingSystem: "Web",
-    inLanguage: "es",
-    description: defaultDescription,
-    url: siteUrl,
-    image: socialImage,
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    'name': siteName,
+    'applicationCategory': 'HealthApplication',
+    'operatingSystem': 'Web',
+    'inLanguage': 'es',
+    'description': defaultDescription,
+    'url': siteUrl,
+    'image': socialImage,
+    'offers': {
+      '@type': 'Offer',
+      'price': '0',
+      'priceCurrency': 'USD'
     },
-    author: {
-      "@type": "Person",
-      name: "MacArthur Orozco",
-    },
-  }),
-);
+    'author': {
+      '@type': 'Person',
+      'name': 'MacArthur Orozco'
+    }
+  })
+)
 
 useHead({
-  meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
+  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
   link: [
-    { rel: "icon", href: "/favicon.ico" },
-    { rel: "canonical", href: () => canonicalUrl.value },
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'canonical', href: () => canonicalUrl.value }
   ],
   script: [
-    { type: "application/ld+json", children: () => structuredData.value },
+    { type: 'application/ld+json', children: () => structuredData.value }
   ],
   htmlAttrs: {
-    lang: "es",
-  },
-});
+    lang: 'es'
+  }
+})
 
 useSeoMeta({
   title: defaultTitle,
   titleTemplate: `%s | ${siteName}`,
   description: defaultDescription,
   applicationName: siteName,
-  author: "MacArthur Orozco",
+  author: 'MacArthur Orozco',
   keywords:
-    "stroke speech, AAC, comunicación asistida, rehabilitación del habla, post ictus, text to speech, PWA, accesibilidad",
+    'stroke speech, AAC, comunicación asistida, rehabilitación del habla, post ictus, text to speech, PWA, accesibilidad',
   robots:
-    "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-  ogType: "website",
+    'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+  ogType: 'website',
   ogSiteName: siteName,
-  ogLocale: "es_MX",
+  ogLocale: 'es_MX',
   ogTitle: `${siteName} - ${defaultTitle}`,
   ogDescription: defaultDescription,
   ogUrl: () => canonicalUrl.value,
   ogImage: socialImage,
-  ogImageAlt: "Stroke Speech logo",
-  twitterCard: "summary_large_image",
+  ogImageAlt: 'Stroke Speech logo',
+  twitterCard: 'summary_large_image',
   twitterTitle: `${siteName} - ${defaultTitle}`,
   twitterDescription: defaultDescription,
   twitterImage: socialImage,
-  twitterImageAlt: "Stroke Speech logo",
-});
+  twitterImageAlt: 'Stroke Speech logo'
+})
 
-const colorMode = useColorMode();
-const { isDeleteMode, toggleDeleteMode, disableDeleteMode } = useDeleteMode();
+const colorMode = useColorMode()
+const { isDeleteMode, toggleDeleteMode, disableDeleteMode } = useDeleteMode()
 
-const isDark = computed(() => colorMode.value === "dark");
+const isDark = computed(() => colorMode.value === 'dark')
 
 function toggleTheme() {
-  colorMode.preference = isDark.value ? "light" : "dark";
+  colorMode.preference = isDark.value ? 'light' : 'dark'
 }
 
 watch(
   () => route.path,
   () => {
-    disableDeleteMode();
-  },
-);
+    disableDeleteMode()
+  }
+)
 </script>
 
 <template>
@@ -95,7 +95,9 @@ watch(
       <div
         class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6"
       >
-        <h1 class="text-base font-semibold">Mi Voz</h1>
+        <h1 class="text-base font-semibold">
+          Mi Voz
+        </h1>
 
         <div class="flex items-center gap-1">
           <UButton
@@ -124,11 +126,16 @@ watch(
     <UMain class="pb-24">
       <NuxtPage />
 
-      <USeparator icon="i-simple-icons-nuxtdotjs" class="mt-10" />
+      <USeparator
+        icon="i-simple-icons-nuxtdotjs"
+        class="mt-10"
+      />
 
       <UFooter>
         <template #left>
-          <p class="text-sm text-muted">Made with ❤️</p>
+          <p class="text-sm text-muted">
+            Made with ❤️
+          </p>
         </template>
 
         <template #right>

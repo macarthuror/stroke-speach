@@ -1,5 +1,5 @@
 export type AddNewItem = {
-  text: string;
-  emoji?: string;
-  toneClass?: string;
-};
+  text: string
+  emoji?: string
+  toneClass?: string
+}

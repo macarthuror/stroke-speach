@@ -1,109 +1,109 @@
 <script setup lang="ts">
-import EmojiPicker from "vue3-emoji-picker";
-import "vue3-emoji-picker/css";
+import EmojiPicker from 'vue3-emoji-picker'
+import 'vue3-emoji-picker/css'
 
 type Emoji = {
-  n: string[];
-  u: string;
-  r: string;
-  t: string;
-  i: string;
-};
+  n: string[]
+  u: string
+  r: string
+  t: string
+  i: string
+}
 
-const newInput = ref("");
-const hasErrors = ref("");
-const selectedEmoji = ref("");
-const selectedToneClass = ref("bg-pastel-blue");
-const isOpen = ref(false);
+const newInput = ref('')
+const hasErrors = ref('')
+const selectedEmoji = ref('')
+const selectedToneClass = ref('bg-pastel-blue')
+const isOpen = ref(false)
 
 const toneOptions = [
   {
-    label: "Azul",
-    value: "bg-pastel-blue",
+    label: 'Azul',
+    value: 'bg-pastel-blue'
   },
   {
-    label: "Rosa",
-    value: "bg-pastel-pink",
+    label: 'Rosa',
+    value: 'bg-pastel-pink'
   },
   {
-    label: "Verde",
-    value: "bg-pastel-green",
+    label: 'Verde',
+    value: 'bg-pastel-green'
   },
   {
-    label: "Morado",
-    value: "bg-pastel-purple",
+    label: 'Morado',
+    value: 'bg-pastel-purple'
   },
   {
-    label: "Amarillo",
-    value: "bg-pastel-yellow",
-  },
-] as const;
+    label: 'Amarillo',
+    value: 'bg-pastel-yellow'
+  }
+] as const
 
-const wordPattern = /^\p{L}+$/u;
+const wordPattern = /^\p{L}+$/u
 
 const props = withDefaults(
   defineProps<{
-    title: string;
-    hasEmoji?: boolean;
-    isWord?: boolean;
+    title?: string
+    hasEmoji?: boolean
+    isWord?: boolean
   }>(),
   {
     title: undefined,
     hasEmoji: false,
-    isWord: false,
-  },
-);
+    isWord: false
+  }
+)
 
 const emit = defineEmits<{
-  adding: [text: string];
-}>();
+  adding: [text: string]
+}>()
 
 const onSelectEmoji = (emoji: Emoji) => {
-  selectedEmoji.value = emoji.i;
-  hasErrors.value = "";
-};
+  selectedEmoji.value = emoji.i
+  hasErrors.value = ''
+}
 
 const onInput = () => {
-  hasErrors.value = "";
-};
+  hasErrors.value = ''
+}
 
 const onClose = () => {
-  newInput.value = "";
-  selectedEmoji.value = "";
-  selectedToneClass.value = "bg-pastel-blue";
-  hasErrors.value = "";
-  isOpen.value = false;
-};
+  newInput.value = ''
+  selectedEmoji.value = ''
+  selectedToneClass.value = 'bg-pastel-blue'
+  hasErrors.value = ''
+  isOpen.value = false
+}
 
 const onAdding = () => {
-  const normalizedInput = newInput.value.trim().normalize("NFC");
+  const normalizedInput = newInput.value.trim().normalize('NFC')
 
-  if (normalizedInput === "") {
-    hasErrors.value = "El texto no puede estar vacío.";
-    return;
+  if (normalizedInput === '') {
+    hasErrors.value = 'El texto no puede estar vacío.'
+    return
   }
 
-  if (props.hasEmoji && selectedEmoji.value === "") {
-    hasErrors.value = "Por favor, selecciona un emoji.";
-    return;
+  if (props.hasEmoji && selectedEmoji.value === '') {
+    hasErrors.value = 'Por favor, selecciona un emoji.'
+    return
   }
 
   if (props.isWord && !wordPattern.test(normalizedInput)) {
-    hasErrors.value =
-      "Solo se permite una palabra (letras, incluyendo acentos, sin espacios ni símbolos).";
-    return;
+    hasErrors.value
+      = 'Solo se permite una palabra (letras, incluyendo acentos, sin espacios ni símbolos).'
+    return
   }
 
   emit(
-    "adding",
+    'adding',
     JSON.stringify({
       text: normalizedInput,
       emoji: selectedEmoji.value,
-      toneClass: selectedToneClass.value,
-    }),
-  );
-  onClose();
-};
+      toneClass: selectedToneClass.value
+    })
+  )
+  onClose()
+}
 </script>
 
 <template>
@@ -170,7 +170,7 @@ const onAdding = () => {
                 name="card-tone"
                 class="sr-only"
                 :value="tone.value"
-              />
+              >
               <span
                 class="w-4 h-4 rounded-full border border-black/10 dark:border-white/10"
                 :class="tone.value"
@@ -183,7 +183,10 @@ const onAdding = () => {
         </div>
 
         <!-- Emoji picker -->
-        <div v-if="hasEmoji" class="flex flex-col gap-2">
+        <div
+          v-if="hasEmoji"
+          class="flex flex-col gap-2"
+        >
           <label class="text-sm font-medium text-[#374151] dark:text-[#d1d5db]">
             Emoji
           </label>
@@ -200,9 +203,10 @@ const onAdding = () => {
                 "
               >
                 <span v-if="selectedEmoji">{{ selectedEmoji }}</span>
-                <span v-else class="text-2xl text-[#CBD5E1] dark:text-[#3f4450]"
-                  >?</span
-                >
+                <span
+                  v-else
+                  class="text-2xl text-[#CBD5E1] dark:text-[#3f4450]"
+                >?</span>
               </div>
               <span class="text-xs text-[#94A3B8] dark:text-[#6b7280]">
                 {{ selectedEmoji ? "Seleccionado" : "Sin elegir" }}
@@ -213,8 +217,8 @@ const onAdding = () => {
               hide-group-names
               hide-search
               disable-skin-tones
-              @select="onSelectEmoji"
               class="!shadow-none !border !border-[#e2e8f0] dark:!border-[#2d3748] !rounded-xl overflow-hidden"
+              @select="onSelectEmoji"
             />
           </div>
         </div>
@@ -240,7 +244,10 @@ const onAdding = () => {
           >
             Cancelar
           </UButton>
-          <UButton class="flex-1 justify-center" @click="onAdding">
+          <UButton
+            class="flex-1 justify-center"
+            @click="onAdding"
+          >
             Agregar tarjeta
           </UButton>
         </div>
