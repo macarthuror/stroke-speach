@@ -41,27 +41,31 @@ watch(
 <template>
   <UApp class="min-h-screen">
     <header class="border-b border-default bg-default">
-      <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+      <div
+        class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6"
+      >
         <h1 class="text-base font-semibold">Mi Voz</h1>
 
         <div class="flex items-center gap-1">
-        <UButton
-          :icon="isDeleteMode ? 'i-lucide-trash-2' : 'i-lucide-trash'"
-          :color="isDeleteMode ? 'error' : 'neutral'"
-          variant="ghost"
-          :aria-label="
-            isDeleteMode ? 'Desactivar modo eliminar' : 'Activar modo eliminar'
-          "
-          @click="toggleDeleteMode"
-        />
+          <UButton
+            :icon="isDeleteMode ? 'i-lucide-trash-2' : 'i-lucide-trash'"
+            :color="isDeleteMode ? 'error' : 'neutral'"
+            variant="ghost"
+            :aria-label="
+              isDeleteMode
+                ? 'Desactivar modo eliminar'
+                : 'Activar modo eliminar'
+            "
+            @click="toggleDeleteMode"
+          />
 
-        <UButton
-          :label="isDark ? '🌞' : '🌙'"
-          color="neutral"
-          variant="ghost"
-          aria-label="Cambiar tema"
-          @click="toggleTheme"
-        />
+          <UButton
+            :label="isDark ? '🌞' : '🌙'"
+            color="neutral"
+            variant="ghost"
+            aria-label="Cambiar tema"
+            @click="toggleTheme"
+          />
         </div>
       </div>
     </header>
