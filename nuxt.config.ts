@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/ui',
+    '@nuxtjs/i18n',
     // "@nuxt/a11y", // disabled: alpha module known to crash vite-node worker
     '@nuxt/hints',
     '@vite-pwa/nuxt',
@@ -97,6 +98,21 @@ export default defineNuxtConfig({
     },
     client: {
       installPrompt: true
+    }
+  },
+
+  i18n: {
+    strategy: 'no_prefix',
+    defaultLocale: 'es',
+    langDir: 'locales',
+    locales: [
+      { code: 'es', language: 'es-MX', name: 'Español', file: 'es.json' },
+      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' }
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'stroke_speech_locale',
+      redirectOn: 'root'
     }
   }
 })

@@ -1,9 +1,11 @@
 <script setup>
+const { t, locale, setLocale } = useI18n()
+
 const siteName = 'Stroke Speech'
 const siteUrl = 'https://macarthuror.github.io/stroke-speach'
-const defaultTitle = 'Comunicación asistida AAC'
-const defaultDescription
-  = 'Aplicación AAC accesible con síntesis de voz, PWA instalable y soporte offline para rehabilitación del habla.'
+
+const defaultTitle = computed(() => t('app.seo.defaultTitle'))
+const defaultDescription = computed(() => t('app.seo.defaultDescription'))
 const socialImage = `${siteUrl}/pwa-512.png`
 
 const route = useRoute()
@@ -17,8 +19,8 @@ const structuredData = computed(() =>
     'name': siteName,
     'applicationCategory': 'HealthApplication',
     'operatingSystem': 'Web',
-    'inLanguage': 'es',
-    'description': defaultDescription,
+    'inLanguage': locale.value,
+    'description': defaultDescription.value,
     'url': siteUrl,
     'image': socialImage,
     'offers': {
@@ -43,34 +45,45 @@ useHead({
     { type: 'application/ld+json', children: () => structuredData.value }
   ],
   htmlAttrs: {
-    lang: 'es'
+    lang: () => locale.value
   }
 })
 
 useSeoMeta({
-  title: defaultTitle,
+  title: () => defaultTitle.value,
   titleTemplate: `%s | ${siteName}`,
-  description: defaultDescription,
+  description: () => defaultDescription.value,
   applicationName: siteName,
   author: 'MacArthur Orozco',
-  keywords:
-    'stroke speech, AAC, comunicación asistida, rehabilitación del habla, post ictus, text to speech, PWA, accesibilidad',
+  keywords: () => t('app.seo.keywords'),
   robots:
     'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   ogType: 'website',
   ogSiteName: siteName,
-  ogLocale: 'es_MX',
-  ogTitle: `${siteName} - ${defaultTitle}`,
-  ogDescription: defaultDescription,
+  ogLocale: () => locale.value === 'en' ? 'en_US' : 'es_MX',
+  ogTitle: () => `${siteName} - ${defaultTitle.value}`,
+  ogDescription: () => defaultDescription.value,
   ogUrl: () => canonicalUrl.value,
   ogImage: socialImage,
-  ogImageAlt: 'Stroke Speech logo',
+  ogImageAlt: () => t('app.seo.ogImageAlt'),
   twitterCard: 'summary_large_image',
-  twitterTitle: `${siteName} - ${defaultTitle}`,
-  twitterDescription: defaultDescription,
+  twitterTitle: () => `${siteName} - ${defaultTitle.value}`,
+  twitterDescription: () => defaultDescription.value,
   twitterImage: socialImage,
-  twitterImageAlt: 'Stroke Speech logo'
+  twitterImageAlt: () => t('app.seo.ogImageAlt')
 })
+
+const uiLocaleOptions = computed(() => [
+  { label: t('language.spanish'), value: 'es' },
+  { label: t('language.english'), value: 'en' }
+])
+
+const onUiLocaleChange = (value) => {
+  if (value === locale.value) {
+    return
+  }
+  setLocale(value)
+}
 
 const colorMode = useColorMode()
 const { isDeleteMode, toggleDeleteMode, disableDeleteMode } = useDeleteMode()
@@ -96,18 +109,28 @@ watch(
         class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6"
       >
         <h1 class="text-base font-semibold">
-          Mi Voz
+          {{ t('app.brand') }}
         </h1>
 
-        <div class="flex items-center gap-1">
+        <div class="flex items-center gap-2">
+          <USelect
+            :model-value="locale"
+            :items="uiLocaleOptions"
+            value-key="value"
+            label-key="label"
+            size="xs"
+            class="w-32"
+            @update:model-value="onUiLocaleChange"
+          />
+
           <UButton
             :icon="isDeleteMode ? 'i-lucide-trash-2' : 'i-lucide-trash'"
             :color="isDeleteMode ? 'error' : 'neutral'"
             variant="ghost"
             :aria-label="
               isDeleteMode
-                ? 'Desactivar modo eliminar'
-                : 'Activar modo eliminar'
+                ? t('app.aria.deleteModeOff')
+                : t('app.aria.deleteModeOn')
             "
             @click="toggleDeleteMode"
           />
@@ -116,7 +139,7 @@ watch(
             :label="isDark ? '🌞' : '🌙'"
             color="neutral"
             variant="ghost"
-            aria-label="Cambiar tema"
+            :aria-label="t('app.aria.changeTheme')"
             @click="toggleTheme"
           />
         </div>
@@ -134,7 +157,7 @@ watch(
       <UFooter>
         <template #left>
           <p class="text-sm text-muted">
-            Made with ❤️
+            {{ t('app.madeWith') }}
           </p>
         </template>
 
@@ -142,14 +165,14 @@ watch(
           <div class="flex items-center gap-1">
             <UButton
               to="/about"
-              label="About"
+              :label="t('app.nav.about')"
               icon="i-lucide-info"
               variant="ghost"
               color="neutral"
             />
             <UButton
               to="/settings"
-              label="Ajustes"
+              :label="t('app.nav.settings')"
               icon="i-lucide-settings"
               variant="ghost"
               color="neutral"
@@ -158,7 +181,7 @@ watch(
               to="https://github.com/macarthuror/stroke-speach"
               target="_blank"
               icon="i-simple-icons-github"
-              aria-label="GitHub"
+              :aria-label="t('app.aria.github')"
               color="neutral"
               variant="ghost"
             />
@@ -175,7 +198,7 @@ watch(
       >
         <UButton
           to="/"
-          label="Inicio"
+          :label="t('app.nav.home')"
           icon="i-lucide-house"
           variant="ghost"
           :color="route.path === '/' ? 'primary' : 'neutral'"
@@ -183,7 +206,7 @@ watch(
         />
         <UButton
           to="/phrases"
-          label="Frases"
+          :label="t('app.nav.phrases')"
           icon="i-lucide-message-square"
           variant="ghost"
           :color="route.path.startsWith('/phrases') ? 'primary' : 'neutral'"

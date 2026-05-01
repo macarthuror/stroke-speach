@@ -1,0 +1,142 @@
+{
+  "language": {
+    "spanish": "Spanish",
+    "english": "English"
+  },
+  "app": {
+    "siteName": "Stroke Speech",
+    "brand": "My Voice",
+    "madeWith": "Made with ❤️",
+    "seo": {
+      "defaultTitle": "AAC assisted communication",
+      "defaultDescription": "Accessible AAC app with speech synthesis, installable PWA, and offline support for speech rehabilitation.",
+      "ogImageAlt": "Stroke Speech logo",
+      "keywords": "stroke speech, AAC, assisted communication, speech rehabilitation, post stroke, text to speech, PWA, accessibility"
+    },
+    "aria": {
+      "deleteModeOn": "Enable delete mode",
+      "deleteModeOff": "Disable delete mode",
+      "changeTheme": "Toggle theme",
+      "github": "GitHub"
+    },
+    "nav": {
+      "about": "About",
+      "settings": "Settings",
+      "home": "Home",
+      "phrases": "Phrases"
+    }
+  },
+  "index": {
+    "seoTitle": "Home",
+    "seoDescription": "AAC word cards for fast assisted communication with speech synthesis.",
+    "addCardTitle": "New word",
+    "defaults": {
+      "yes": "Yes",
+      "no": "No",
+      "water": "Water",
+      "food": "Food",
+      "bathroom": "Bathroom",
+      "pain": "It hurts"
+    }
+  },
+  "phrases": {
+    "seoTitle": "Phrases",
+    "seoDescription": "Customizable AAC phrases to support daily assisted communication.",
+    "addCardTitle": "Add new phrase",
+    "defaults": {
+      "cold": "I am cold",
+      "hot": "I am hot",
+      "painHere": "It hurts here",
+      "family": "I want to talk to my family"
+    }
+  },
+  "settings": {
+    "seoTitle": "General settings",
+    "seoDescription": "General Stroke Speech configuration: visual theme and usage preferences.",
+    "title": "General settings",
+    "intro": "This section groups the general app settings. You can use the theme button in the header and centralize future preferences here.",
+    "voiceLanguage": "Voice language",
+    "speechControls": "Pitch and speed",
+    "resetDefaults": "Restore defaults",
+    "pitch": "Pitch",
+    "pitchHint": "Low ← → High",
+    "rate": "Speed (rate)",
+    "rateHint": "Slow ← → Fast",
+    "testVoice": "Test voice",
+    "testVoiceHint": "Tap the card to hear the voice with the current language, pitch, and speed.",
+    "speechLanguages": {
+      "esMX": "Spanish (Mexico)",
+      "esES": "Spanish (Spain)",
+      "enUS": "English (US)",
+      "enGB": "English (UK)",
+      "zhCN": "中文 (Mandarin)",
+      "hiIN": "हिन्दी",
+      "frFR": "Français",
+      "arSA": "العربية",
+      "ptBR": "Português (BR)",
+      "ruRU": "Русский",
+      "deDE": "Deutsch",
+      "jaJP": "日本語",
+      "idID": "Indonesia"
+    },
+    "demoText": {
+      "esMX": "¡Hola! Soy una demo de voz",
+      "esES": "¡Hola! Soy una demo de voz",
+      "enUS": "Hello! I am a voice demo",
+      "enGB": "Hello! I am a voice demo",
+      "zhCN": "你好！我是语音演示",
+      "hiIN": "नमस्ते! मैं एक आवाज़ डेमो हूँ",
+      "frFR": "Bonjour ! Je suis une démo vocale",
+      "arSA": "مرحبا! أنا عرض صوتي",
+      "ptBR": "Olá! Sou uma demonstração de voz",
+      "ruRU": "Привет! Я голосовая демонстрация",
+      "deDE": "Hallo! Ich bin eine Sprachdemo",
+      "jaJP": "こんにちは！音声デモです",
+      "idID": "Halo! Saya demo suara"
+    }
+  },
+  "about": {
+    "seoTitle": "About this project",
+    "seoDescription": "Accessible AAC app for assisted communication, with PWA support, offline mode, and speech synthesis for speech rehabilitation.",
+    "title": "About this project",
+    "subtitle": "Stroke Speech - AAC (Augmentative and Alternative Communication)",
+    "p1": "Stroke Speech is an accessible web app to support communication for people with speech difficulties, especially in post-stroke recovery contexts. It allows selecting word and phrase cards to express daily needs using speech synthesis.",
+    "p2": "It also works as a Progressive Web App (PWA), so it can be installed on mobile and desktop, work offline, and stay automatically updated after each deployment.",
+    "goalsTitle": "Key goals",
+    "goalsText": "Immediate communication, maximum accessibility, and full availability with an installable experience and offline support.",
+    "featuresTitle": "Main features",
+    "featuresText": "Customizable cards, speech synthesis, colors and emojis per card, safe delete mode, and auto-updating PWA.",
+    "techTitle": "Technologies used",
+    "techText": "Nuxt 4, Vue 3, Nuxt UI, Tailwind CSS 4, @vite-pwa/nuxt (Workbox), VueUse, TypeScript, ESLint, and Vitest."
+  },
+  "addCard": {
+    "add": "Add",
+    "ariaAdd": "Add new card",
+    "newCard": "New card",
+    "textLabel": "Card text",
+    "wordHint": "Word mode enabled: this field accepts only one word, with no spaces. Accents are allowed (example: canción, árbol).",
+    "placeholderWord": "Example: song",
+    "placeholderText": "Write here...",
+    "colorLabel": "Card color",
+    "emojiLabel": "Emoji",
+    "selected": "Selected",
+    "notSelected": "Not selected",
+    "cancel": "Cancel",
+    "addCardButton": "Add card",
+    "colors": {
+      "blue": "Blue",
+      "pink": "Pink",
+      "green": "Green",
+      "purple": "Purple",
+      "yellow": "Yellow"
+    },
+    "errors": {
+      "empty": "Text cannot be empty.",
+      "emoji": "Please select an emoji.",
+      "singleWord": "Only one word is allowed (letters including accents, no spaces or symbols)."
+    }
+  },
+  "voiceCard": {
+    "deleteAria": "Delete card"
+  }
+}

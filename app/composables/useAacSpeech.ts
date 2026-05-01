@@ -1,5 +1,11 @@
 import { toValue } from "vue";
-export function useAacSpeech(lang = "es-ES", pitch = 1, rate = 1) {
+import type { MaybeRefOrGetter } from "vue";
+
+export function useAacSpeech(
+  lang: MaybeRefOrGetter<string> = "es-ES",
+  pitch: MaybeRefOrGetter<number> = 1,
+  rate: MaybeRefOrGetter<number> = 1,
+) {
   const isSupported =
     typeof window !== "undefined" &&
     "speechSynthesis" in window &&

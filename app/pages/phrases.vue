@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import type { AddNewItem } from '~/typos'
 
+const { t } = useI18n()
+
 useSeoMeta({
-  title: 'Frases',
-  description:
-    'Frases AAC personalizables para facilitar comunicación cotidiana con voz asistida.'
+  title: () => t('phrases.seoTitle'),
+  description: () => t('phrases.seoDescription')
 })
 
-const { speak } = useAacSpeech('es-ES')
+const speechLang = useLocalStorage<string>('speech-lang', 'es-MX')
+const pitch = useLocalStorage<number>('speech-pitch', 1)
+const rate = useLocalStorage<number>('speech-rate', 1)
+const { speak } = useAacSpeech(speechLang, pitch, rate)
 const isStorageReady = ref(false)
 
 type Phrase = {
@@ -17,19 +21,19 @@ type Phrase = {
 
 const phrases = useLocalStorage<Phrase[]>('phrases', [
   {
-    text: 'Tengo frio',
+    text: t('phrases.defaults.cold'),
     toneClass: 'bg-pastel-blue'
   },
   {
-    text: 'Tengo Calor',
+    text: t('phrases.defaults.hot'),
     toneClass: 'bg-pastel-blue'
   },
   {
-    text: 'Me duele aquí',
+    text: t('phrases.defaults.painHere'),
     toneClass: 'bg-pastel-blue'
   },
   {
-    text: 'Quiero hablar con mi familia',
+    text: t('phrases.defaults.family'),
     toneClass: 'bg-pastel-blue'
   }
 ])
@@ -70,12 +74,13 @@ onMounted(() => {
             :key="`${card.text}-${index}`"
             :text="card.text"
             :tone-class="card.toneClass"
+            :delete-aria-label="t('voiceCard.deleteAria')"
             @select="onCardSelect"
             @delete="onCardDelete(index)"
           />
 
           <AddCard
-            title="Agregar nueva frase"
+            :title="t('phrases.addCardTitle')"
             @adding="onAdding"
           />
         </template>

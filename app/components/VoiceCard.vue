@@ -1,14 +1,18 @@
 <script setup lang="ts">
+import { useDeleteMode } from '../composables/useDeleteMode'
+
 const props = withDefaults(
   defineProps<{
     title?: string
     emoji?: string
     text: string
     toneClass?: string
+    deleteAriaLabel?: string
   }>(),
   {
     title: undefined,
-    toneClass: 'bg-pastel-blue'
+    toneClass: 'bg-pastel-blue',
+    deleteAriaLabel: 'Eliminar tarjeta'
   }
 )
 
@@ -53,7 +57,7 @@ const { isDeleteMode } = useDeleteMode()
     <button
       v-if="isDeleteMode"
       type="button"
-      aria-label="Eliminar tarjeta"
+      :aria-label="deleteAriaLabel"
       class="absolute top-2 right-2 h-9 w-9 rounded-full bg-white/90 dark:bg-[#22242b]/90 border border-[#d8dee9] dark:border-[#3f4450] text-[#9b1c1c] dark:text-[#fca5a5] text-xl leading-none flex items-center justify-center hover:brightness-95 transition"
       @click.stop="onDelete"
     >

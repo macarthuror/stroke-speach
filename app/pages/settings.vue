@@ -1,66 +1,99 @@
 <script setup lang="ts">
+const { t } = useI18n();
+
 useSeoMeta({
-  title: "Ajustes generales",
-  description:
-    "Configuración general de Stroke Speech: tema visual y preferencias de uso.",
+  title: () => t("settings.seoTitle"),
+  description: () => t("settings.seoDescription"),
 });
 
 const lang = useLocalStorage<string>("speech-lang", "es-MX");
 const pitch = useLocalStorage<number>("speech-pitch", 1);
 const rate = useLocalStorage<number>("speech-rate", 1);
 
-const langs = [
-  { label: "Español (México)", value: "es-MX" },
-  { label: "Español (España)", value: "es-ES" },
-  { label: "English (US)", value: "en-US" },
-  { label: "English (UK)", value: "en-GB" },
-  { label: "中文 (Mandarin)", value: "zh-CN" },
-  { label: "हिन्दी", value: "hi-IN" },
-  { label: "Français", value: "fr-FR" },
-  { label: "العربية", value: "ar-SA" },
-  { label: "Português (BR)", value: "pt-BR" },
-  { label: "Русский", value: "ru-RU" },
-  { label: "Deutsch", value: "de-DE" },
-  { label: "日本語", value: "ja-JP" },
-  { label: "Indonesia", value: "id-ID" },
-];
+const langs = computed(() => [
+  { label: t("settings.speechLanguages.esMX"), value: "es-MX" },
+  { label: t("settings.speechLanguages.esES"), value: "es-ES" },
+  { label: t("settings.speechLanguages.enUS"), value: "en-US" },
+  { label: t("settings.speechLanguages.enGB"), value: "en-GB" },
+  { label: t("settings.speechLanguages.zhCN"), value: "zh-CN" },
+  { label: t("settings.speechLanguages.hiIN"), value: "hi-IN" },
+  { label: t("settings.speechLanguages.frFR"), value: "fr-FR" },
+  { label: t("settings.speechLanguages.arSA"), value: "ar-SA" },
+  { label: t("settings.speechLanguages.ptBR"), value: "pt-BR" },
+  { label: t("settings.speechLanguages.ruRU"), value: "ru-RU" },
+  { label: t("settings.speechLanguages.deDE"), value: "de-DE" },
+  { label: t("settings.speechLanguages.jaJP"), value: "ja-JP" },
+  { label: t("settings.speechLanguages.idID"), value: "id-ID" },
+]);
 
 // TODO: Completar con los idiomas que soporta la API de voz, idealmente detectarlos dinámicamente
-const langsTest = [
+const langsTest = computed(() => [
   {
-    label: "Español (México)",
-    text: "¡Hola! Soy una demo de voz",
+    label: t("settings.speechLanguages.esMX"),
+    text: t("settings.demoText.esMX"),
     value: "es-MX",
   },
   {
-    label: "Español (España)",
-    text: "¡Hola! Soy una demo de voz",
+    label: t("settings.speechLanguages.esES"),
+    text: t("settings.demoText.esES"),
     value: "es-ES",
   },
-  { label: "English (US)", text: "Hello! I am a voice demo", value: "en-US" },
-  { label: "English (UK)", text: "Hello! I am a voice demo", value: "en-GB" },
-  { label: "中文 (Mandarin)", text: "你好！我是语音演示", value: "zh-CN" },
-  { label: "हिन्दी", text: "नमस्ते! मैं एक आवाज़ डेमो हूँ", value: "hi-IN" },
   {
-    label: "Français",
-    text: "Bonjour ! Je suis une démo vocale",
+    label: t("settings.speechLanguages.enUS"),
+    text: t("settings.demoText.enUS"),
+    value: "en-US",
+  },
+  {
+    label: t("settings.speechLanguages.enGB"),
+    text: t("settings.demoText.enGB"),
+    value: "en-GB",
+  },
+  {
+    label: t("settings.speechLanguages.zhCN"),
+    text: t("settings.demoText.zhCN"),
+    value: "zh-CN",
+  },
+  {
+    label: t("settings.speechLanguages.hiIN"),
+    text: t("settings.demoText.hiIN"),
+    value: "hi-IN",
+  },
+  {
+    label: t("settings.speechLanguages.frFR"),
+    text: t("settings.demoText.frFR"),
     value: "fr-FR",
   },
-  { label: "العربية", text: "مرحبا! أنا عرض صوتي", value: "ar-SA" },
   {
-    label: "Português (BR)",
-    text: "Olá! Sou uma demonstração de voz",
+    label: t("settings.speechLanguages.arSA"),
+    text: t("settings.demoText.arSA"),
+    value: "ar-SA",
+  },
+  {
+    label: t("settings.speechLanguages.ptBR"),
+    text: t("settings.demoText.ptBR"),
     value: "pt-BR",
   },
   {
-    label: "Русский",
-    text: "Привет! Я голосовая демонстрация",
+    label: t("settings.speechLanguages.ruRU"),
+    text: t("settings.demoText.ruRU"),
     value: "ru-RU",
   },
-  { label: "Deutsch", text: "Hallo! Ich bin eine Sprachdemo", value: "de-DE" },
-  { label: "日本語", text: "こんにちは！音声デモです", value: "ja-JP" },
-  { label: "Indonesia", text: "Halo! Saya demo suara", value: "id-ID" },
-];
+  {
+    label: t("settings.speechLanguages.deDE"),
+    text: t("settings.demoText.deDE"),
+    value: "de-DE",
+  },
+  {
+    label: t("settings.speechLanguages.jaJP"),
+    text: t("settings.demoText.jaJP"),
+    value: "ja-JP",
+  },
+  {
+    label: t("settings.speechLanguages.idID"),
+    text: t("settings.demoText.idID"),
+    value: "id-ID",
+  },
+]);
 
 // USlider works with 0–100; map to actual speech ranges
 // pitch: 0–2  → slider 0–100
@@ -87,7 +120,12 @@ const resetDefaults = () => {
 };
 
 const currentLangDemo = computed(
-  () => langsTest.find((l) => l.value === lang.value) ?? langsTest[0],
+  () =>
+    langsTest.value.find((l) => l.value === lang.value) ?? {
+      label: t("settings.speechLanguages.esMX"),
+      text: t("settings.demoText.esMX"),
+      value: "es-MX",
+    },
 );
 </script>
 
@@ -95,16 +133,15 @@ const currentLangDemo = computed(
   <section
     class="mx-auto w-full max-w-4xl px-6 py-8 text-[#1c1b1b] dark:text-[#f4f4f5]"
   >
-    <h2 class="text-2xl font-semibold tracking-tight">Ajustes generales</h2>
+    <h2 class="text-2xl font-semibold tracking-tight">{{ t("settings.title") }}</h2>
 
     <p class="mt-4 text-sm leading-6 text-[#4b5563] dark:text-[#d1d5db]">
-      Esta sección agrupa la configuración general de la app. Puedes usar el
-      botón de tema en el header y aquí centralizar futuras preferencias de uso.
+      {{ t("settings.intro") }}
     </p>
 
     <div class="mt-6 space-y-3">
       <div class="rounded-xl border border-default bg-default p-4">
-        <p class="text-sm font-medium">Idioma de voz</p>
+        <p class="text-sm font-medium">{{ t("settings.voiceLanguage") }}</p>
         <p class="mt-2 text-sm text-[#4b5563] dark:text-[#d1d5db]">
           <USelect
             v-model="lang"
@@ -117,39 +154,39 @@ const currentLangDemo = computed(
 
       <div class="rounded-xl border border-default bg-default p-4 space-y-4">
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium">Tono y velocidad</span>
+          <span class="text-sm font-medium">{{ t("settings.speechControls") }}</span>
           <UButton
             size="xs"
             variant="ghost"
             color="neutral"
             @click="resetDefaults"
           >
-            Restaurar predeterminados
+            {{ t("settings.resetDefaults") }}
           </UButton>
         </div>
 
         <div>
           <div class="flex items-center justify-between">
-            <p class="text-sm font-medium">Tono (pitch)</p>
+            <p class="text-sm font-medium">{{ t("settings.pitch") }}</p>
             <span class="text-xs text-[#4b5563] dark:text-[#d1d5db]">{{
               pitch
             }}</span>
           </div>
           <p class="mt-2 text-xs text-[#4b5563] dark:text-[#d1d5db] mb-2">
-            Grave ← → Agudo
+            {{ t("settings.pitchHint") }}
           </p>
           <USlider v-model="pitchSlider" :min="0" :max="100" :step="10" />
         </div>
 
         <div>
           <div class="flex items-center justify-between">
-            <p class="text-sm font-medium">Velocidad (rate)</p>
+            <p class="text-sm font-medium">{{ t("settings.rate") }}</p>
             <span class="text-xs text-[#4b5563] dark:text-[#d1d5db]">{{
               rate
             }}</span>
           </div>
           <p class="mt-2 text-xs text-[#4b5563] dark:text-[#d1d5db] mb-2">
-            Lento ← → Rápido
+            {{ t("settings.rateHint") }}
           </p>
           <USlider v-model="rateSlider" :min="0" :max="100" :step="10" />
         </div>
@@ -157,15 +194,15 @@ const currentLangDemo = computed(
 
       <div class="rounded-xl border border-default bg-default p-4 space-y-4">
         <div>
-          <p class="text-sm font-medium">Probar voz</p>
+          <p class="text-sm font-medium">{{ t("settings.testVoice") }}</p>
           <p class="mt-1 text-xs text-[#4b5563] dark:text-[#d1d5db] mb-3">
-            Toca la tarjeta para escuchar la voz con el idioma, tono y velocidad
-            actuales.
+            {{ t("settings.testVoiceHint") }}
           </p>
           <VoiceCard
             :text="currentLangDemo.text"
             emoji="🗣️"
             tone-class="bg-pastel-blue"
+            :delete-aria-label="t('voiceCard.deleteAria')"
             @select="speak(currentLangDemo.text)"
           />
         </div>

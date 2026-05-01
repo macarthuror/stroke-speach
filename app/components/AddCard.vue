@@ -16,28 +16,30 @@ const selectedEmoji = ref('')
 const selectedToneClass = ref('bg-pastel-blue')
 const isOpen = ref(false)
 
-const toneOptions = [
+const { t } = useI18n()
+
+const toneOptions = computed(() => [
   {
-    label: 'Azul',
+    label: t('addCard.colors.blue'),
     value: 'bg-pastel-blue'
   },
   {
-    label: 'Rosa',
+    label: t('addCard.colors.pink'),
     value: 'bg-pastel-pink'
   },
   {
-    label: 'Verde',
+    label: t('addCard.colors.green'),
     value: 'bg-pastel-green'
   },
   {
-    label: 'Morado',
+    label: t('addCard.colors.purple'),
     value: 'bg-pastel-purple'
   },
   {
-    label: 'Amarillo',
+    label: t('addCard.colors.yellow'),
     value: 'bg-pastel-yellow'
   }
-] as const
+] as const)
 
 const wordPattern = /^\p{L}+$/u
 
@@ -79,18 +81,17 @@ const onAdding = () => {
   const normalizedInput = newInput.value.trim().normalize('NFC')
 
   if (normalizedInput === '') {
-    hasErrors.value = 'El texto no puede estar vacío.'
+    hasErrors.value = t('addCard.errors.empty')
     return
   }
 
   if (props.hasEmoji && selectedEmoji.value === '') {
-    hasErrors.value = 'Por favor, selecciona un emoji.'
+    hasErrors.value = t('addCard.errors.emoji')
     return
   }
 
   if (props.isWord && !wordPattern.test(normalizedInput)) {
-    hasErrors.value
-      = 'Solo se permite una palabra (letras, incluyendo acentos, sin espacios ni símbolos).'
+    hasErrors.value = t('addCard.errors.singleWord')
     return
   }
 
@@ -109,17 +110,17 @@ const onAdding = () => {
 <template>
   <button
     type="button"
-    aria-label="Agregar nueva tarjeta"
+    :aria-label="t('addCard.ariaAdd')"
     class="rounded-2xl min-h-[180px] flex flex-col items-center justify-center gap-3 p-4 border-4 border-dashed border-[#CBD5E1] dark:border-[#3f4450] text-[#64748B] dark:text-[#6b7280] hover:border-[#94A3B8] dark:hover:border-[#6b7280] hover:bg-[#f0eded] dark:hover:bg-[#1e2028] hover:text-[#475569] dark:hover:text-[#9ca3af] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#94A3B8]"
     @click="isOpen = true"
   >
     <span class="text-5xl leading-none font-light select-none">+</span>
-    <span class="text-sm font-medium">Agregar</span>
+    <span class="text-sm font-medium">{{ t('addCard.add') }}</span>
   </button>
 
   <UModal
     v-model:open="isOpen"
-    :title="title || 'Nueva tarjeta'"
+    :title="title || t('addCard.newCard')"
     @update:open="(v) => !v && onClose()"
   >
     <template #body>
@@ -127,21 +128,20 @@ const onAdding = () => {
         <!-- Text input -->
         <div class="flex flex-col gap-1.5">
           <label class="text-sm font-medium text-[#374151] dark:text-[#d1d5db]">
-            Texto de la tarjeta
+            {{ t('addCard.textLabel') }}
           </label>
           <p
             v-if="isWord"
             class="text-xs text-[#6b7280] dark:text-[#9ca3af] leading-relaxed"
           >
-            Modo palabra activado: este campo acepta solo una palabra, sin
-            espacios. Se permiten acentos (ejemplo: canción, árbol).
+            {{ t('addCard.wordHint') }}
           </p>
           <UInput
             v-model.trim="newInput"
             color="neutral"
             highlight
             size="lg"
-            :placeholder="isWord ? 'Ejemplo: canción' : 'Escribe aquí...'"
+            :placeholder="isWord ? t('addCard.placeholderWord') : t('addCard.placeholderText')"
             :ui="{ base: 'w-full' }"
             @input="onInput"
             @keydown.enter="onAdding"
@@ -151,7 +151,7 @@ const onAdding = () => {
         <!-- Card color -->
         <div class="flex flex-col gap-2">
           <label class="text-sm font-medium text-[#374151] dark:text-[#d1d5db]">
-            Color de tarjeta
+            {{ t('addCard.colorLabel') }}
           </label>
           <div class="flex flex-wrap gap-2">
             <label
@@ -188,7 +188,7 @@ const onAdding = () => {
           class="flex flex-col gap-2"
         >
           <label class="text-sm font-medium text-[#374151] dark:text-[#d1d5db]">
-            Emoji
+            {{ t('addCard.emojiLabel') }}
           </label>
           <div class="flex items-start gap-4">
             <div
@@ -209,7 +209,7 @@ const onAdding = () => {
                 >?</span>
               </div>
               <span class="text-xs text-[#94A3B8] dark:text-[#6b7280]">
-                {{ selectedEmoji ? "Seleccionado" : "Sin elegir" }}
+                {{ selectedEmoji ? t('addCard.selected') : t('addCard.notSelected') }}
               </span>
             </div>
             <EmojiPicker
@@ -242,13 +242,13 @@ const onAdding = () => {
             class="flex-1 justify-center"
             @click="onClose"
           >
-            Cancelar
+            {{ t('addCard.cancel') }}
           </UButton>
           <UButton
             class="flex-1 justify-center"
             @click="onAdding"
           >
-            Agregar tarjeta
+            {{ t('addCard.addCardButton') }}
           </UButton>
         </div>
       </div>

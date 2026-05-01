@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { AddNewItem } from "~/typos";
 
+const { t } = useI18n();
+
 useSeoMeta({
-  title: "Inicio",
-  description:
-    "Tarjetas AAC de palabras para comunicación asistida rápida con síntesis de voz.",
+  title: () => t("index.seoTitle"),
+  description: () => t("index.seoDescription"),
 });
 
 const userLang = useLocalStorage<string>(
@@ -24,32 +25,32 @@ type Word = {
 
 const words = useLocalStorage<Word[]>("words", [
   {
-    text: "Sí",
+    text: t("index.defaults.yes"),
     emoji: "👍",
     toneClass: "bg-pastel-blue",
   },
   {
-    text: "No",
+    text: t("index.defaults.no"),
     emoji: "👎",
     toneClass: "bg-pastel-pink",
   },
   {
-    text: "Agua",
+    text: t("index.defaults.water"),
     emoji: "💧",
     toneClass: "bg-pastel-blue",
   },
   {
-    text: "Comida",
+    text: t("index.defaults.food"),
     emoji: "🍽️",
     toneClass: "bg-pastel-green",
   },
   {
-    text: "Baño",
+    text: t("index.defaults.bathroom"),
     emoji: "🚽",
     toneClass: "bg-pastel-purple",
   },
   {
-    text: "Me duele",
+    text: t("index.defaults.pain"),
     emoji: "🤕",
     toneClass: "bg-pastel-yellow",
   },
@@ -93,11 +94,12 @@ onMounted(() => {
             :text="card.text"
             :emoji="card.emoji"
             :tone-class="card.toneClass"
+            :delete-aria-label="t('voiceCard.deleteAria')"
             @select="onCardSelect"
             @delete="onCardDelete(index)"
           />
 
-          <AddCard title="Word" has-emoji is-word @adding="onAdding" />
+          <AddCard :title="t('index.addCardTitle')" has-emoji is-word @adding="onAdding" />
         </template>
 
         <template v-else>
