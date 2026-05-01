@@ -13,7 +13,33 @@ type Emoji = {
 const newInput = ref("");
 const hasErrors = ref("");
 const selectedEmoji = ref("");
+const selectedToneClass = ref("bg-pastel-blue");
 const isOpen = ref(false);
+
+const toneOptions = [
+  {
+    label: "Azul",
+    value: "bg-pastel-blue",
+  },
+  {
+    label: "Rosa",
+    value: "bg-pastel-pink",
+  },
+  {
+    label: "Verde",
+    value: "bg-pastel-green",
+  },
+  {
+    label: "Morado",
+    value: "bg-pastel-purple",
+  },
+  {
+    label: "Amarillo",
+    value: "bg-pastel-yellow",
+  },
+] as const;
+
+const wordPattern = /^\p{L}+$/u;
 
 const props = withDefaults(
   defineProps<{
@@ -44,12 +70,15 @@ const onInput = () => {
 const onClose = () => {
   newInput.value = "";
   selectedEmoji.value = "";
+  selectedToneClass.value = "bg-pastel-blue";
   hasErrors.value = "";
   isOpen.value = false;
 };
 
 const onAdding = () => {
-  if (newInput.value.trim() === "") {
+  const normalizedInput = newInput.value.trim().normalize("NFC");
+
+  if (normalizedInput === "") {
     hasErrors.value = "El texto no puede estar vacío.";
     return;
   }
@@ -59,18 +88,18 @@ const onAdding = () => {
     return;
   }
 
-  // TODO: Validate to not contain special characters, only letters without spaces JUST ONE WORD
-  if (props.isWord && !/^[a-zA-Z]+$/.test(newInput.value)) {
-    hasErrors.value = "El texto solo puede contener letras sin espacios.";
+  if (props.isWord && !wordPattern.test(normalizedInput)) {
+    hasErrors.value =
+      "Solo se permite una palabra (letras, incluyendo acentos, sin espacios ni símbolos).";
     return;
   }
 
   emit(
     "adding",
     JSON.stringify({
-      text: newInput.value,
+      text: normalizedInput,
       emoji: selectedEmoji.value,
-      toneClass: "bg-pastel-blue",
+      toneClass: selectedToneClass.value,
     }),
   );
   onClose();
@@ -100,16 +129,57 @@ const onAdding = () => {
           <label class="text-sm font-medium text-[#374151] dark:text-[#d1d5db]">
             Texto de la tarjeta
           </label>
+          <p
+            v-if="isWord"
+            class="text-xs text-[#6b7280] dark:text-[#9ca3af] leading-relaxed"
+          >
+            Modo palabra activado: este campo acepta solo una palabra, sin
+            espacios. Se permiten acentos (ejemplo: canción, árbol).
+          </p>
           <UInput
             v-model.trim="newInput"
             color="neutral"
             highlight
             size="lg"
-            placeholder="Escribe aquí..."
+            :placeholder="isWord ? 'Ejemplo: canción' : 'Escribe aquí...'"
             :ui="{ base: 'w-full' }"
             @input="onInput"
             @keydown.enter="onAdding"
           />
+        </div>
+
+        <!-- Card color -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm font-medium text-[#374151] dark:text-[#d1d5db]">
+            Color de tarjeta
+          </label>
+          <div class="flex flex-wrap gap-2">
+            <label
+              v-for="tone in toneOptions"
+              :key="tone.value"
+              class="inline-flex items-center gap-2 rounded-lg border px-2.5 py-1.5 text-sm cursor-pointer transition-colors"
+              :class="
+                selectedToneClass === tone.value
+                  ? 'border-[#94A3B8] dark:border-[#6b7280] bg-[#f8fafc] dark:bg-[#1e2028]'
+                  : 'border-[#e2e8f0] dark:border-[#2d3748] hover:border-[#cbd5e1] dark:hover:border-[#4b5563]'
+              "
+            >
+              <input
+                v-model="selectedToneClass"
+                type="radio"
+                name="card-tone"
+                class="sr-only"
+                :value="tone.value"
+              />
+              <span
+                class="w-4 h-4 rounded-full border border-black/10 dark:border-white/10"
+                :class="tone.value"
+              />
+              <span class="text-[#374151] dark:text-[#d1d5db]">
+                {{ tone.label }}
+              </span>
+            </label>
+          </div>
         </div>
 
         <!-- Emoji picker -->
