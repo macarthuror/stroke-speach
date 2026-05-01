@@ -77,14 +77,12 @@ watch(
 
       <UFooter>
         <template #left>
-          <p class="text-sm text-muted">
-            Built with Nuxt UI • © {{ new Date().getFullYear() }}
-          </p>
+          <p class="text-sm text-muted">Made with ❤️</p>
         </template>
 
         <template #right>
           <UButton
-            to="https://github.com/nuxt-ui-templates/starter"
+            to="https://github.com/macarthuror/stroke-speach"
             target="_blank"
             icon="i-simple-icons-github"
             aria-label="GitHub"
