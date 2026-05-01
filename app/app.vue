@@ -22,22 +22,39 @@ useSeoMeta({
 
 const route = useRoute();
 const colorMode = useColorMode();
+const { isDeleteMode, toggleDeleteMode, disableDeleteMode } = useDeleteMode();
 
 const isDark = computed(() => colorMode.value === "dark");
 
 function toggleTheme() {
   colorMode.preference = isDark.value ? "light" : "dark";
 }
+
+watch(
+  () => route.path,
+  () => {
+    disableDeleteMode();
+  },
+);
 </script>
 
 <template>
   <UApp class="min-h-screen">
-    <UHeader>
-      <template #left>
+    <header class="border-b border-default bg-default">
+      <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         <h1 class="text-base font-semibold">Mi Voz</h1>
-      </template>
 
-      <template #right>
+        <div class="flex items-center gap-1">
+        <UButton
+          :icon="isDeleteMode ? 'i-lucide-trash-2' : 'i-lucide-trash'"
+          :color="isDeleteMode ? 'error' : 'neutral'"
+          variant="ghost"
+          :aria-label="
+            isDeleteMode ? 'Desactivar modo eliminar' : 'Activar modo eliminar'
+          "
+          @click="toggleDeleteMode"
+        />
+
         <UButton
           :label="isDark ? '🌞' : '🌙'"
           color="neutral"
@@ -45,8 +62,9 @@ function toggleTheme() {
           aria-label="Cambiar tema"
           @click="toggleTheme"
         />
-      </template>
-    </UHeader>
+        </div>
+      </div>
+    </header>
 
     <UMain class="pb-24">
       <NuxtPage />

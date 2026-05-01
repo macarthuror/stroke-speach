@@ -24,6 +24,8 @@ const onSelect = () => {
 const onDelete = () => {
   emit("delete");
 };
+
+const { isDeleteMode } = useDeleteMode();
 </script>
 
 <template>
@@ -46,6 +48,7 @@ const onDelete = () => {
     </button>
 
     <button
+      v-if="isDeleteMode"
       type="button"
       aria-label="Eliminar tarjeta"
       class="absolute top-2 right-2 h-9 w-9 rounded-full bg-white/90 dark:bg-[#22242b]/90 border border-[#d8dee9] dark:border-[#3f4450] text-[#9b1c1c] dark:text-[#fca5a5] text-xl leading-none flex items-center justify-center hover:brightness-95 transition"
