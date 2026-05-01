@@ -1,85 +1,98 @@
-# Nuxt Starter Template
+# 🗣️ Stroke Speech
 
-[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
+<p align="center">
+  <img src="public/pwa-icon.svg" alt="Stroke Speech Logo" width="140" height="140" />
+</p>
 
-Use this template to get started with [Nuxt UI](https://ui.nuxt.com) quickly.
+<p align="center">
+  <a href="https://macarthuror.github.io/stroke-speach/"><img src="https://img.shields.io/badge/Status-Live-brightgreen?style=flat-square" alt="Status Live"></a>
+  <img src="https://img.shields.io/badge/PWA-Ready-blue?style=flat-square&logo=pwa" alt="PWA Ready">
+  <img src="https://img.shields.io/badge/Framework-Nuxt_4-00DC82?style=flat-square&logo=nuxt.js" alt="Nuxt 4">
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="License MIT">
+</p>
 
-- [Live demo](https://starter-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
+> **Aplicación web AAC (Augmentative and Alternative Communication)** enfocada en personas con dificultades del habla, especialmente diseñada para facilitar el proceso de recuperación post-ictus (derrame cerebral).
 
-<a href="https://starter-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-    <img alt="Nuxt Starter Template" src="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png" width="830" height="466">
-  </picture>
-</a>
+---
 
-> The starter template for Vue is on https://github.com/nuxt-ui-templates/starter-vue. 👀
+## 🌍 Abstract (English)
 
-## Quick Start
+**Stroke Speech** is an accessible, Progressive Web App (PWA) designed to provide Augmentative and Alternative Communication (AAC) for stroke survivors and individuals with speech impairments. By utilizing the Web Speech API (Text-to-Speech), it allows users to quickly select customizable word and phrase cards to communicate their daily needs. With a simple, high-contrast UI and full offline support, Stroke Speech aims to bridge the communication gap during rehabilitation, ensuring users have a voice anywhere, anytime.
 
-```bash [Terminal]
-npm create nuxt@latest -- -t ui
-```
+---
 
-## Deploy your own
+## 🎯 Descripción y Objetivos
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=starter&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-template.nuxt.dev%2F&demo-title=Nuxt%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.)
+**Stroke Speech** permite crear, personalizar y reproducir tarjetas de comunicación por voz para necesidades rápidas de uso diario.
 
-## Setup
+**Objetivos clave:**
 
-Make sure to install the dependencies:
+- **Comunicación inmediata:** Facilitar la expresión mediante tarjetas de palabras y frases preconfiguradas.
+- **Accesibilidad máxima:** Interfaz simple, clara, de alto contraste y con áreas táctiles grandes.
+- **Disponibilidad total:** Funcionar como PWA instalable con soporte 100% offline.
+
+---
+
+## ✨ Características Principales
+
+- 🗂️ **Tarjetas Personalizables:** Crea y organiza tarjetas de palabras y frases.
+- 🔊 **Síntesis de Voz (TTS):** Reproducción nativa en español usando `SpeechSynthesis`.
+- 🎨 **Identificación Visual:** Selector de color y soporte de emojis por tarjeta.
+- 🗑️ **Gestión Segura:** Modo "eliminar" controlado desde el header para evitar toques accidentales.
+- 📱 **Experiencia Nativa (PWA):** Instalable en escritorio (Chrome/Edge) y móvil (Android/iOS mediante A2HS).
+- 📶 **Modo Offline:** Soporte sin conexión a internet garantizado por Service Workers.
+- 🔄 **Auto-Update:** Actualización automática de la PWA tras nuevos despliegues.
+
+---
+
+## 🏗️ Arquitectura y Rutas
+
+La aplicación está diseñada con una navegación plana para evitar que el usuario se pierda:
+
+- `/` ➔ Tarjetas de palabras (Inicio)
+- `/phrases` ➔ Tarjetas de frases complejas
+- `/settings` ➔ Ajustes generales (Voz, visualización)
+- `/about` ➔ Información del proyecto
+
+---
+
+## 💻 Tecnologías Usadas
+
+Este proyecto está construido con un stack moderno y enfocado en el máximo rendimiento:
+
+**Framework y UI:**
+
+- [Nuxt 4](https://nuxt.com/) & [Vue 3](https://vuejs.org/)
+- [Nuxt UI](https://ui.nuxt.com/) & [Tailwind CSS 4](https://tailwindcss.com/)
+
+**PWA y Rendimiento:**
+
+- `@vite-pwa/nuxt` & [Workbox](https://developer.chrome.com/docs/workbox/)
+
+**Utilidades:**
+
+- [VueUse](https://vueuse.org/) (`@vueuse/core`, `@vueuse/nuxt`)
+- `vue3-emoji-picker`
+
+**Calidad y Testing:**
+
+- TypeScript, ESLint, Vitest, Vue Test Utils
+
+---
+
+## 🚀 Instalación y Desarrollo Local
+
+**Requisitos previos:**
+
+- [Node.js](https://nodejs.org/) 22+
+- [pnpm](https://pnpm.io/) 10+
+
+**Pasos de instalación:**
 
 ```bash
+# 1. Instalar dependencias
 pnpm install
-```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
+# 2. Iniciar servidor de desarrollo
 pnpm dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-pnpm build
-```
-
-Locally preview production build:
-
-```bash
-pnpm preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-## GitHub Pages
-
-This repository is configured to deploy to GitHub Pages automatically using GitHub Actions.
-
-1. Push to the `main` branch.
-2. In GitHub, open `Settings > Pages`.
-3. In `Build and deployment`, select `GitHub Actions` as the source.
-
-The workflow `.github/workflows/deploy-pages.yml` generates a static build and publishes `.output/public`.
-
-Nuxt base URL is set automatically in CI from `GITHUB_REPOSITORY`, so it works for project pages like `https://<user>.github.io/<repo>/`.
-
-## PWA (instalable y offline)
-
-La app está configurada como PWA y se puede instalar en escritorio/móvil.
-
-- Android/Chrome: abre el sitio y usa `Instalar app` en el menú del navegador.
-- iOS/Safari: abre el sitio y usa `Compartir > Añadir a pantalla de inicio`.
-
-Para uso offline, el service worker cachea los assets estáticos y usa fallback de navegación al `index.html` generado.
-
-## Renovate integration
-
-Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
