@@ -18,7 +18,9 @@ useSeoMeta({
       />
 
       <div>
-        <h2 class="text-2xl font-semibold tracking-tight">About this project</h2>
+        <h2 class="text-2xl font-semibold tracking-tight">
+          About this project
+        </h2>
         <p class="mt-1 text-sm text-[#4b5563] dark:text-[#d1d5db]">
           Stroke Speech - AAC (Augmentative and Alternative Communication)
         </p>
@@ -28,8 +30,8 @@ useSeoMeta({
     <p class="mt-4 text-sm leading-6 text-[#4b5563] dark:text-[#d1d5db]">
       Stroke Speech es una aplicación web accesible para apoyar la comunicación
       de personas con dificultades del habla, especialmente en contextos de
-      recuperación post-ictus. Permite seleccionar tarjetas de palabras y
-      frases para expresar necesidades cotidianas mediante síntesis de voz.
+      recuperación post-ictus. Permite seleccionar tarjetas de palabras y frases
+      para expresar necesidades cotidianas mediante síntesis de voz.
     </p>
 
     <p class="mt-3 text-sm leading-6 text-[#4b5563] dark:text-[#d1d5db]">
@@ -55,7 +57,9 @@ useSeoMeta({
         </p>
       </article>
 
-      <article class="rounded-xl border border-default bg-default p-4 sm:col-span-2">
+      <article
+        class="rounded-xl border border-default bg-default p-4 sm:col-span-2"
+      >
         <h3 class="text-sm font-semibold">Tecnologías usadas</h3>
         <p class="mt-2 text-sm text-[#4b5563] dark:text-[#d1d5db]">
           Nuxt 4, Vue 3, Nuxt UI, Tailwind CSS 4, @vite-pwa/nuxt (Workbox),
