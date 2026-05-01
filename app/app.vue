@@ -7,7 +7,9 @@ const defaultDescription =
 const socialImage = `${siteUrl}/pwa-512.png`;
 
 const route = useRoute();
-const canonicalUrl = computed(() => `${siteUrl}${route.path === "/" ? "" : route.path}`);
+const canonicalUrl = computed(
+  () => `${siteUrl}${route.path === "/" ? "" : route.path}`,
+);
 const structuredData = computed(() =>
   JSON.stringify({
     "@context": "https://schema.org",
@@ -22,12 +24,12 @@ const structuredData = computed(() =>
     offers: {
       "@type": "Offer",
       price: "0",
-      priceCurrency: "USD"
+      priceCurrency: "USD",
     },
     author: {
       "@type": "Person",
-      name: "MacArthur Orozco"
-    }
+      name: "MacArthur Orozco",
+    },
   }),
 );
 
@@ -35,9 +37,11 @@ useHead({
   meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
   link: [
     { rel: "icon", href: "/favicon.ico" },
-    { rel: "canonical", href: () => canonicalUrl.value }
+    { rel: "canonical", href: () => canonicalUrl.value },
   ],
-  script: [{ type: "application/ld+json", children: () => structuredData.value }],
+  script: [
+    { type: "application/ld+json", children: () => structuredData.value },
+  ],
   htmlAttrs: {
     lang: "es",
   },
@@ -51,7 +55,8 @@ useSeoMeta({
   author: "MacArthur Orozco",
   keywords:
     "stroke speech, AAC, comunicación asistida, rehabilitación del habla, post ictus, text to speech, PWA, accesibilidad",
-  robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  robots:
+    "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
   ogType: "website",
   ogSiteName: siteName,
   ogLocale: "es_MX",
