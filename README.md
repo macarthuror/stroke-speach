@@ -59,6 +59,27 @@ pnpm preview
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
+## GitHub Pages
+
+This repository is configured to deploy to GitHub Pages automatically using GitHub Actions.
+
+1. Push to the `main` branch.
+2. In GitHub, open `Settings > Pages`.
+3. In `Build and deployment`, select `GitHub Actions` as the source.
+
+The workflow `.github/workflows/deploy-pages.yml` generates a static build and publishes `.output/public`.
+
+Nuxt base URL is set automatically in CI from `GITHUB_REPOSITORY`, so it works for project pages like `https://<user>.github.io/<repo>/`.
+
+## PWA (instalable y offline)
+
+La app está configurada como PWA y se puede instalar en escritorio/móvil.
+
+- Android/Chrome: abre el sitio y usa `Instalar app` en el menú del navegador.
+- iOS/Safari: abre el sitio y usa `Compartir > Añadir a pantalla de inicio`.
+
+Para uso offline, el service worker cachea los assets estáticos y usa fallback de navegación al `index.html` generado.
+
 ## Renovate integration
 
 Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
