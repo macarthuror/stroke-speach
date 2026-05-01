@@ -107,7 +107,7 @@
     "featuresTitle": "Características principales",
     "featuresText": "Tarjetas personalizables, síntesis de voz, colores y emojis por tarjeta, modo eliminar seguro y PWA con auto-update.",
     "techTitle": "Tecnologías usadas",
-    "techText": "Nuxt 4, Vue 3, Nuxt UI, Tailwind CSS 4, @vite-pwa/nuxt (Workbox), VueUse, TypeScript, ESLint y Vitest."
+    "techText": "Nuxt 4, Vue 3, Nuxt UI, Tailwind CSS 4, {'@'}vite-pwa/nuxt (Workbox), VueUse, TypeScript, ESLint y Vitest."
   },
   "addCard": {
     "add": "Agregar",
