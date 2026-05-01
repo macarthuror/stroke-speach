@@ -81,14 +81,30 @@ watch(
         </template>
 
         <template #right>
-          <UButton
-            to="https://github.com/macarthuror/stroke-speach"
-            target="_blank"
-            icon="i-simple-icons-github"
-            aria-label="GitHub"
-            color="neutral"
-            variant="ghost"
-          />
+          <div class="flex items-center gap-1">
+            <UButton
+              to="/about"
+              label="About"
+              icon="i-lucide-info"
+              variant="ghost"
+              color="neutral"
+            />
+            <UButton
+              to="/settings"
+              label="Ajustes"
+              icon="i-lucide-settings"
+              variant="ghost"
+              color="neutral"
+            />
+            <UButton
+              to="https://github.com/macarthuror/stroke-speach"
+              target="_blank"
+              icon="i-simple-icons-github"
+              aria-label="GitHub"
+              color="neutral"
+              variant="ghost"
+            />
+          </div>
         </template>
       </UFooter>
     </UMain>
