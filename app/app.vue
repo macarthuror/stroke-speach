@@ -212,4 +212,6 @@ watch(
       </nav>
     </footer>
   </UApp>
+
+  <FaceTracker />
 </template>
