@@ -1,99 +1,99 @@
 <script setup lang="ts">
-const { t } = useI18n();
+const { t } = useI18n()
 
 useSeoMeta({
-  title: () => t("settings.seoTitle"),
-  description: () => t("settings.seoDescription"),
-});
+  title: () => t('settings.seoTitle'),
+  description: () => t('settings.seoDescription')
+})
 
-const lang = useLocalStorage<string>("speech-lang", "es-MX");
-const pitch = useLocalStorage<number>("speech-pitch", 1);
-const rate = useLocalStorage<number>("speech-rate", 1);
+const lang = useLocalStorage<string>('speech-lang', 'es-MX')
+const pitch = useLocalStorage<number>('speech-pitch', 1)
+const rate = useLocalStorage<number>('speech-rate', 1)
 
 const langs = computed(() => [
-  { label: t("settings.speechLanguages.esMX"), value: "es-MX" },
-  { label: t("settings.speechLanguages.esES"), value: "es-ES" },
-  { label: t("settings.speechLanguages.enUS"), value: "en-US" },
-  { label: t("settings.speechLanguages.enGB"), value: "en-GB" },
-  { label: t("settings.speechLanguages.zhCN"), value: "zh-CN" },
-  { label: t("settings.speechLanguages.hiIN"), value: "hi-IN" },
-  { label: t("settings.speechLanguages.frFR"), value: "fr-FR" },
-  { label: t("settings.speechLanguages.arSA"), value: "ar-SA" },
-  { label: t("settings.speechLanguages.ptBR"), value: "pt-BR" },
-  { label: t("settings.speechLanguages.ruRU"), value: "ru-RU" },
-  { label: t("settings.speechLanguages.deDE"), value: "de-DE" },
-  { label: t("settings.speechLanguages.jaJP"), value: "ja-JP" },
-  { label: t("settings.speechLanguages.idID"), value: "id-ID" },
-]);
+  { label: t('settings.speechLanguages.esMX'), value: 'es-MX' },
+  { label: t('settings.speechLanguages.esES'), value: 'es-ES' },
+  { label: t('settings.speechLanguages.enUS'), value: 'en-US' },
+  { label: t('settings.speechLanguages.enGB'), value: 'en-GB' },
+  { label: t('settings.speechLanguages.zhCN'), value: 'zh-CN' },
+  { label: t('settings.speechLanguages.hiIN'), value: 'hi-IN' },
+  { label: t('settings.speechLanguages.frFR'), value: 'fr-FR' },
+  { label: t('settings.speechLanguages.arSA'), value: 'ar-SA' },
+  { label: t('settings.speechLanguages.ptBR'), value: 'pt-BR' },
+  { label: t('settings.speechLanguages.ruRU'), value: 'ru-RU' },
+  { label: t('settings.speechLanguages.deDE'), value: 'de-DE' },
+  { label: t('settings.speechLanguages.jaJP'), value: 'ja-JP' },
+  { label: t('settings.speechLanguages.idID'), value: 'id-ID' }
+])
 
 // TODO: Completar con los idiomas que soporta la API de voz, idealmente detectarlos dinámicamente
 const langsTest = computed(() => [
   {
-    label: t("settings.speechLanguages.esMX"),
-    text: t("settings.demoText.esMX"),
-    value: "es-MX",
+    label: t('settings.speechLanguages.esMX'),
+    text: t('settings.demoText.esMX'),
+    value: 'es-MX'
   },
   {
-    label: t("settings.speechLanguages.esES"),
-    text: t("settings.demoText.esES"),
-    value: "es-ES",
+    label: t('settings.speechLanguages.esES'),
+    text: t('settings.demoText.esES'),
+    value: 'es-ES'
   },
   {
-    label: t("settings.speechLanguages.enUS"),
-    text: t("settings.demoText.enUS"),
-    value: "en-US",
+    label: t('settings.speechLanguages.enUS'),
+    text: t('settings.demoText.enUS'),
+    value: 'en-US'
   },
   {
-    label: t("settings.speechLanguages.enGB"),
-    text: t("settings.demoText.enGB"),
-    value: "en-GB",
+    label: t('settings.speechLanguages.enGB'),
+    text: t('settings.demoText.enGB'),
+    value: 'en-GB'
   },
   {
-    label: t("settings.speechLanguages.zhCN"),
-    text: t("settings.demoText.zhCN"),
-    value: "zh-CN",
+    label: t('settings.speechLanguages.zhCN'),
+    text: t('settings.demoText.zhCN'),
+    value: 'zh-CN'
   },
   {
-    label: t("settings.speechLanguages.hiIN"),
-    text: t("settings.demoText.hiIN"),
-    value: "hi-IN",
+    label: t('settings.speechLanguages.hiIN'),
+    text: t('settings.demoText.hiIN'),
+    value: 'hi-IN'
   },
   {
-    label: t("settings.speechLanguages.frFR"),
-    text: t("settings.demoText.frFR"),
-    value: "fr-FR",
+    label: t('settings.speechLanguages.frFR'),
+    text: t('settings.demoText.frFR'),
+    value: 'fr-FR'
   },
   {
-    label: t("settings.speechLanguages.arSA"),
-    text: t("settings.demoText.arSA"),
-    value: "ar-SA",
+    label: t('settings.speechLanguages.arSA'),
+    text: t('settings.demoText.arSA'),
+    value: 'ar-SA'
   },
   {
-    label: t("settings.speechLanguages.ptBR"),
-    text: t("settings.demoText.ptBR"),
-    value: "pt-BR",
+    label: t('settings.speechLanguages.ptBR'),
+    text: t('settings.demoText.ptBR'),
+    value: 'pt-BR'
   },
   {
-    label: t("settings.speechLanguages.ruRU"),
-    text: t("settings.demoText.ruRU"),
-    value: "ru-RU",
+    label: t('settings.speechLanguages.ruRU'),
+    text: t('settings.demoText.ruRU'),
+    value: 'ru-RU'
   },
   {
-    label: t("settings.speechLanguages.deDE"),
-    text: t("settings.demoText.deDE"),
-    value: "de-DE",
+    label: t('settings.speechLanguages.deDE'),
+    text: t('settings.demoText.deDE'),
+    value: 'de-DE'
   },
   {
-    label: t("settings.speechLanguages.jaJP"),
-    text: t("settings.demoText.jaJP"),
-    value: "ja-JP",
+    label: t('settings.speechLanguages.jaJP'),
+    text: t('settings.demoText.jaJP'),
+    value: 'ja-JP'
   },
   {
-    label: t("settings.speechLanguages.idID"),
-    text: t("settings.demoText.idID"),
-    value: "id-ID",
-  },
-]);
+    label: t('settings.speechLanguages.idID'),
+    text: t('settings.demoText.idID'),
+    value: 'id-ID'
+  }
+])
 
 // USlider works with 0–100; map to actual speech ranges
 // pitch: 0–2  → slider 0–100
@@ -101,32 +101,32 @@ const langsTest = computed(() => [
 const pitchSlider = computed({
   get: () => Math.round((pitch.value / 2) * 100),
   set: (v: number) => {
-    pitch.value = parseFloat(((v / 100) * 2).toFixed(2));
-  },
-});
+    pitch.value = parseFloat(((v / 100) * 2).toFixed(2))
+  }
+})
 
 const rateSlider = computed({
   get: () => Math.round(((rate.value - 0.5) / 1.5) * 100),
   set: (v: number) => {
-    rate.value = parseFloat((0.5 + (v / 100) * 1.5).toFixed(2));
-  },
-});
+    rate.value = parseFloat((0.5 + (v / 100) * 1.5).toFixed(2))
+  }
+})
 
-const { speak } = useAacSpeech(lang, pitch, rate);
+const { speak } = useAacSpeech(lang, pitch, rate)
 
 const resetDefaults = () => {
-  pitch.value = 1;
-  rate.value = 1;
-};
+  pitch.value = 1
+  rate.value = 1
+}
 
 const currentLangDemo = computed(
   () =>
-    langsTest.value.find((l) => l.value === lang.value) ?? {
-      label: t("settings.speechLanguages.esMX"),
-      text: t("settings.demoText.esMX"),
-      value: "es-MX",
-    },
-);
+    langsTest.value.find(l => l.value === lang.value) ?? {
+      label: t('settings.speechLanguages.esMX'),
+      text: t('settings.demoText.esMX'),
+      value: 'es-MX'
+    }
+)
 </script>
 
 <template>
@@ -143,7 +143,9 @@ const currentLangDemo = computed(
 
     <div class="mt-6 space-y-3">
       <div class="rounded-xl border border-default bg-default p-4">
-        <p class="text-sm font-medium">{{ t("settings.voiceLanguage") }}</p>
+        <p class="text-sm font-medium">
+          {{ t("settings.voiceLanguage") }}
+        </p>
         <p class="mt-2 text-sm text-[#4b5563] dark:text-[#d1d5db]">
           <USelect
             v-model="lang"
@@ -171,7 +173,9 @@ const currentLangDemo = computed(
 
         <div>
           <div class="flex items-center justify-between">
-            <p class="text-sm font-medium">{{ t("settings.pitch") }}</p>
+            <p class="text-sm font-medium">
+              {{ t("settings.pitch") }}
+            </p>
             <span class="text-xs text-[#4b5563] dark:text-[#d1d5db]">{{
               pitch
             }}</span>
@@ -179,12 +183,19 @@ const currentLangDemo = computed(
           <p class="mt-2 text-xs text-[#4b5563] dark:text-[#d1d5db] mb-2">
             {{ t("settings.pitchHint") }}
           </p>
-          <USlider v-model="pitchSlider" :min="0" :max="100" :step="10" />
+          <USlider
+            v-model="pitchSlider"
+            :min="0"
+            :max="100"
+            :step="10"
+          />
         </div>
 
         <div>
           <div class="flex items-center justify-between">
-            <p class="text-sm font-medium">{{ t("settings.rate") }}</p>
+            <p class="text-sm font-medium">
+              {{ t("settings.rate") }}
+            </p>
             <span class="text-xs text-[#4b5563] dark:text-[#d1d5db]">{{
               rate
             }}</span>
@@ -192,13 +203,20 @@ const currentLangDemo = computed(
           <p class="mt-2 text-xs text-[#4b5563] dark:text-[#d1d5db] mb-2">
             {{ t("settings.rateHint") }}
           </p>
-          <USlider v-model="rateSlider" :min="0" :max="100" :step="10" />
+          <USlider
+            v-model="rateSlider"
+            :min="0"
+            :max="100"
+            :step="10"
+          />
         </div>
       </div>
 
       <div class="rounded-xl border border-default bg-default p-4 space-y-4">
         <div>
-          <p class="text-sm font-medium">{{ t("settings.testVoice") }}</p>
+          <p class="text-sm font-medium">
+            {{ t("settings.testVoice") }}
+          </p>
           <p class="mt-1 text-xs text-[#4b5563] dark:text-[#d1d5db] mb-3">
             {{ t("settings.testVoiceHint") }}
           </p>
