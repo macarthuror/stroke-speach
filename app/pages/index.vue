@@ -8,7 +8,10 @@ useSeoMeta({
   description: () => t('index.seoDescription')
 })
 
-const browserLang = (typeof navigator !== 'undefined' && (navigator.languages?.[0] || navigator.language)) || 'es-MX'
+const browserLang
+  = (typeof navigator !== 'undefined'
+    && (navigator.languages?.[0] || navigator.language))
+  || 'es-MX'
 const userLang = useLocalStorage<string>('speech-lang', browserLang)
 const pitch = useLocalStorage<number>('speech-pitch', 1)
 const rate = useLocalStorage<number>('speech-rate', 1)

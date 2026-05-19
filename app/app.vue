@@ -1,12 +1,14 @@
 <script setup>
-
 const { t, locale, setLocale } = useI18n()
 
 // Detect browser language
-const browserLang = (typeof navigator !== 'undefined' && (navigator.languages?.[0] || navigator.language)) || 'es'
+const browserLang
+  = (typeof navigator !== 'undefined'
+    && (navigator.languages?.[0] || navigator.language))
+  || 'es'
 
 // Set UI language: Spanish if browser is Spanish, else English
-if (process.client) {
+if (import.meta.client) {
   if (!localStorage.getItem('nuxt-ui-lang')) {
     if (browserLang.startsWith('es')) {
       setLocale('es')
