@@ -1,5 +1,24 @@
 <script setup>
+
 const { t, locale, setLocale } = useI18n()
+
+// Detect browser language
+const browserLang = (typeof navigator !== 'undefined' && (navigator.languages?.[0] || navigator.language)) || 'es'
+
+// Set UI language: Spanish if browser is Spanish, else English
+if (process.client) {
+  if (!localStorage.getItem('nuxt-ui-lang')) {
+    if (browserLang.startsWith('es')) {
+      setLocale('es')
+      localStorage.setItem('nuxt-ui-lang', 'es')
+    } else {
+      setLocale('en')
+      localStorage.setItem('nuxt-ui-lang', 'en')
+    }
+  } else {
+    setLocale(localStorage.getItem('nuxt-ui-lang'))
+  }
+}
 
 const siteName = 'Stroke Speech'
 const siteUrl = 'https://macarthuror.github.io/stroke-speach'
