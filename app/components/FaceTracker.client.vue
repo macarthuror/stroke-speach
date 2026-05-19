@@ -189,7 +189,9 @@ function ejecutarClic() {
         osc.connect(ctx.destination)
         osc.start()
         osc.stop(ctx.currentTime + 0.1)
-      } catch (e) {}
+      } catch (e) {
+        console.error('Error al reproducir sonido de clic:', e)
+      }
     }
   }
 }
