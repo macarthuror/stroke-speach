@@ -1,64 +1,51 @@
-name: deploy-pages
+name: Deploy PR previews
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
     types:
       - opened
-      - synchronize
       - reopened
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+      - synchronize
+      - closed
 
 concurrency:
-  group: pages-${{ github.ref }}
+  group: preview-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  deploy-preview:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v6
+        if: github.event.action != 'closed'
+        uses: pnpm/action-setup@v4
 
       - name: Install node
-        uses: actions/setup-node@v6
+        if: github.event.action != 'closed'
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Install and Build
+        if: github.event.action != 'closed' # We don't need the build if we know the preview will be removed
+        env:
+          PR_PREVIEW: "true"
+          NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/pr-preview/pr-${{ github.event.pull_request.number }}/
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm generate
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build static site
-        run: pnpm generate
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
         with:
-          path: ./.output/public
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          preview: ${{ github.event_name == 'pull_request' }}
+          source-dir: ./.output/public
+          preview-branch: gh-pages
+          qr-code: true

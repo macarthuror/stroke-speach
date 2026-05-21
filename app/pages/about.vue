@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const { t } = useI18n();
+const { t } = useI18n()
 
 useSeoMeta({
-  title: () => t("about.seoTitle"),
-  description: () => t("about.seoDescription"),
-});
+  title: () => t('about.seoTitle'),
+  description: () => t('about.seoDescription')
+})
 </script>
 
 <template>
@@ -16,7 +16,7 @@ useSeoMeta({
         src="/pwa-icon.svg"
         :alt="t('app.seo.ogImageAlt')"
         class="h-16 w-16 rounded-2xl border border-default bg-default p-2"
-      />
+      >
 
       <div>
         <h2 class="text-2xl font-semibold tracking-tight">

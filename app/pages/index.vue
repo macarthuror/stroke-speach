@@ -1,81 +1,82 @@
 <script setup lang="ts">
-import type { AddNewItem } from "~/typos";
+import type { AddNewItem } from '~/typos'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 useSeoMeta({
-  title: () => t("index.seoTitle"),
-  description: () => t("index.seoDescription"),
-});
+  title: () => t('index.seoTitle'),
+  description: () => t('index.seoDescription')
+})
 
-const userLang = useLocalStorage<string>(
-  "speech-lang",
-  navigator.languages?.[0] || navigator.language || "es-MX",
-);
-const pitch = useLocalStorage<number>("speech-pitch", 1);
-const rate = useLocalStorage<number>("speech-rate", 1);
-const { speak } = useAacSpeech(userLang, pitch, rate);
-const isStorageReady = ref(false);
+const browserLang
+  = (typeof navigator !== 'undefined'
+    && (navigator.languages?.[0] || navigator.language))
+  || 'es-MX'
+const userLang = useLocalStorage<string>('speech-lang', browserLang)
+const pitch = useLocalStorage<number>('speech-pitch', 1)
+const rate = useLocalStorage<number>('speech-rate', 1)
+const { speak } = useAacSpeech(userLang, pitch, rate)
+const isStorageReady = ref(false)
 
 type Word = {
-  text: string;
-  emoji: string;
-  toneClass: string;
-};
+  text: string
+  emoji: string
+  toneClass: string
+}
 
-const words = useLocalStorage<Word[]>("words", [
+const words = useLocalStorage<Word[]>('words', [
   {
-    text: t("index.defaults.yes"),
-    emoji: "👍",
-    toneClass: "bg-pastel-blue",
+    text: t('index.defaults.yes'),
+    emoji: '👍',
+    toneClass: 'bg-pastel-blue'
   },
   {
-    text: t("index.defaults.no"),
-    emoji: "👎",
-    toneClass: "bg-pastel-pink",
+    text: t('index.defaults.no'),
+    emoji: '👎',
+    toneClass: 'bg-pastel-pink'
   },
   {
-    text: t("index.defaults.water"),
-    emoji: "💧",
-    toneClass: "bg-pastel-blue",
+    text: t('index.defaults.water'),
+    emoji: '💧',
+    toneClass: 'bg-pastel-blue'
   },
   {
-    text: t("index.defaults.food"),
-    emoji: "🍽️",
-    toneClass: "bg-pastel-green",
+    text: t('index.defaults.food'),
+    emoji: '🍽️',
+    toneClass: 'bg-pastel-green'
   },
   {
-    text: t("index.defaults.bathroom"),
-    emoji: "🚽",
-    toneClass: "bg-pastel-purple",
+    text: t('index.defaults.bathroom'),
+    emoji: '🚽',
+    toneClass: 'bg-pastel-purple'
   },
   {
-    text: t("index.defaults.pain"),
-    emoji: "🤕",
-    toneClass: "bg-pastel-yellow",
-  },
-]);
+    text: t('index.defaults.pain'),
+    emoji: '🤕',
+    toneClass: 'bg-pastel-yellow'
+  }
+])
 
 const onCardSelect = (text: string) => {
-  speak(text);
-};
+  speak(text)
+}
 
 const onCardDelete = (index: number) => {
-  words.value = words.value.filter((_, cardIndex) => cardIndex !== index);
-};
+  words.value = words.value.filter((_, cardIndex) => cardIndex !== index)
+}
 
 const onAdding = (item: string) => {
-  const newItem: AddNewItem = JSON.parse(item);
+  const newItem: AddNewItem = JSON.parse(item)
   words.value.push({
     text: newItem.text,
-    emoji: newItem.emoji ?? "",
-    toneClass: newItem.toneClass ?? "bg-pastel-blue",
-  });
-};
+    emoji: newItem.emoji ?? '',
+    toneClass: newItem.toneClass ?? 'bg-pastel-blue'
+  })
+}
 
 onMounted(() => {
-  isStorageReady.value = true;
-});
+  isStorageReady.value = true
+})
 </script>
 
 <template>
@@ -108,7 +109,10 @@ onMounted(() => {
         </template>
 
         <template v-else>
-          <VoiceCardSkeleton v-for="index in 6" :key="index" />
+          <VoiceCardSkeleton
+            v-for="index in 6"
+            :key="index"
+          />
         </template>
       </div>
     </main>
