@@ -2,9 +2,8 @@
 const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1]
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true'
 const isPreviewDeploy = process.env.PR_PREVIEW === 'true'
-const baseURL
-  = process.env.NUXT_APP_BASE_URL
-    || (isGitHubActions && repositoryName ? `/${repositoryName}/` : '/')
+const baseURL = process.env.NUXT_APP_BASE_URL
+  || (isGitHubActions && repositoryName ? `/${repositoryName}/` : '/')
 const previewPathRegex = repositoryName
   ? new RegExp(`^/${repositoryName}/pr-preview/`)
   : /^\/pr-preview\//
